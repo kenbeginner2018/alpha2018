@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import exercise06.link.bean.LinkCategoryBean;
+import library.bean.LinkCategoryBean;
 
 /**
  * 「リンク種別」テーブルにアクセスするDAOクラス

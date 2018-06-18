@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import exercise06.link.bean.LinkBean;
-import exercise06.link.bean.LinkCategoryBean;
 import exercise06.link.dao.LinkCategoryDAO;
 import exercise06.link.dao.LinkDAO;
+import library.bean.LinkBean;
+import library.bean.LinkCategoryBean;
 
 /**
  * クライアントからのリクエストや表示画面をコントロールするサーブレットです。
