@@ -2,15 +2,15 @@ package library.bean;
 
 import java.io.Serializable;
 
-public class UserBean implements Serializable {
-	private String userId; 			//ユーザーID
-	private String userPw;				//ユーザーPW
-	private int borrowNum;				//借りている数
-	private String dept;				//学部名
-	private String name;				//氏名
-	private int grade;					//学年
-	private boolean ivailability;		//使用可否
+public class UserBean implements Serializable{
 
+	private String userId ;
+	private String userPw ;
+	private int borrowNum ;
+	private int deptId;
+	private String name ;
+	private int grade ;
+	private boolean availability ;
 
 	public String getUserId() {
 		return userId;
@@ -30,11 +30,11 @@ public class UserBean implements Serializable {
 	public void setBorrowNum(int borrowNum) {
 		this.borrowNum = borrowNum;
 	}
-	public String getDept() {
-		return dept;
+	public int getDeptId() {
+		return deptId;
 	}
-	public void setDept(String dept) {
-		this.dept = dept;
+	public void setDeptId(int deptId) {
+		this.deptId = deptId;
 	}
 	public String getName() {
 		return name;
@@ -48,10 +48,10 @@ public class UserBean implements Serializable {
 	public void setGrade(int grade) {
 		this.grade = grade;
 	}
-	public boolean isIvailability() {
-		return ivailability;
+	public boolean isAvailability() {
+		return availability;
 	}
-	public void setIvailability(boolean ivailability) {
-		this.ivailability = ivailability;
+	public void setAvailability(boolean availability) {
+		this.availability = availability;
 	}
 }
