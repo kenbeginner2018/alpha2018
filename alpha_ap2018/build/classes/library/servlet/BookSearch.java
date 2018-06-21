@@ -37,19 +37,19 @@ public class BookSearch extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		// ƒ†[ƒU[ˆê——Ši”[—p
+		// ãƒ¦ãƒ¼ã‚¶ãƒ¼ä¸€è¦§æ ¼ç´ç”¨
 		List<BookBean> bookList = new ArrayList<BookBean>();
-		// ƒ†[ƒU[ˆê——‚ğæ“¾‚·‚é
+		// ãƒ¦ãƒ¼ã‚¶ãƒ¼ä¸€è¦§ã‚’å–å¾—ã™ã‚‹
 		try {
 			BookDAO bookDAO = new BookDAO();
 			bookList = bookDAO.getAllBookData();
 		} catch (SQLException e) {
-			// TODO ©“®¶¬‚³‚ê‚½ catch ƒuƒƒbƒN
+			// TODO è‡ªå‹•ç”Ÿæˆã•ã‚ŒãŸ catch ãƒ–ãƒ­ãƒƒã‚¯
 			e.printStackTrace();
 		}
 
 		request.setAttribute("bookList", bookList);
-		request.setAttribute("message", "ŒŸõğŒ‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢");
+		request.setAttribute("message", "æ¤œç´¢æ¡ä»¶ã‚’å…¥åŠ›ã—ã¦ãã ã•ã„");
 		ServletContext context = getServletContext();
 		RequestDispatcher rd = context.getRequestDispatcher("/BookSearch.jsp");
 		rd.forward(request, response);
@@ -63,7 +63,7 @@ public class BookSearch extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 
-		// ‘JˆÚæJSP‚ğŠi”[
+		// é·ç§»å…ˆJSPã‚’æ ¼ç´
 		String jsp = "/BookSearch.jsp";
 		String btn = request.getParameter("button");
 
@@ -75,7 +75,7 @@ public class BookSearch extends HttpServlet {
 						request.getParameter("publisher"),request.getParameter("subject"));
 			request.setAttribute("bookList", bookList);
 		} catch (SQLException e) {
-			// TODO ©“®¶¬‚³‚ê‚½ catch ƒuƒƒbƒN
+			// TODO è‡ªå‹•ç”Ÿæˆã•ã‚ŒãŸ catch ãƒ–ãƒ­ãƒƒã‚¯
 			e.printStackTrace();
 		}
 		if(!btn.equals("RESET")) {
@@ -85,9 +85,9 @@ public class BookSearch extends HttpServlet {
 			request.setAttribute("subject",request.getParameter("subject"));
 		}
 
-		// JSP‚É‘JˆÚ
+		// JSPã«é·ç§»
 		ServletContext context = getServletContext();
-		RequestDispatcher rd = context.getRequestDispatcher(jsp); // “]‘—æ‚ÌURL
+		RequestDispatcher rd = context.getRequestDispatcher(jsp); // è»¢é€å…ˆã®URL
 		rd.forward(request, response);
 	}
 }

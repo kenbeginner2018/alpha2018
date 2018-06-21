@@ -6,34 +6,34 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>���Ђ̒ǉ�</title>
+<title>書籍の追加</title>
 </head>
 <body>
 	<div style="padding:50px;">
 	<form action="BookManagement" method="post">
-		<table border="1" summary="���Џ��">
+		<table border="1" summary="書籍情報">
 			<tr>
-				<td>���ʃ��x��</td>
+				<td>識別ラベル</td>
 				<td><input type="text" name="label" value=""/></td>
-				<td>�^�C�g��</td>
+				<td>タイトル</td>
 				<td><input type="text" name="title" value=""/></td>
 			</tr>
 			<tr>
-				<td>���</td>
+				<td>作者</td>
 				<td><input type="text" name="author" value=""/></td>
-				<td>�o�Ŏ�</td>
+				<td>出版社</td>
 				<td><input type="text" name="publisher" value=""/></td>
 			</tr>
 			<tr>
-				<td>�o�ŔN</td>
+				<td>出版年</td>
 				<td><input type="text" name="publicationYear" value=""/></td>
-				<td>�݌ɐ�</td>
+				<td>在庫数</td>
 				<td><input type="text" name="stockNum" value=""/></td>
 			</tr>
 			<tr>
-				<td>�Ȗږ�</td>
+				<td>科目名</td>
 				<td><input type="text" name="subjectName" value="" /></td>
-				<td>�摜�p�X</td>
+				<td>画像パス</td>
 				<td><input type="text" name="imagePath" value=""/></td>
 			</tr>
 			<tr>
@@ -41,13 +41,13 @@
 			</tr>
 			<tr>
 				<td colspan="4">
-					<button type="reset">���Z�b�g</button>
-					�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@<input type="submit" name="button" value="�ǉ�" />
+					<button type="reset">リセット</button>
+					　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　<input type="submit" name="button" value="追加" />
 				</td>
 			</tr>
 		</table>
 	</form>
 	</div>
-	<a href="/LibrarySystem/BookSearch">�߂�</a>
+	<a href="/LibrarySystem/BookSearch">戻る</a>
 </body>
 </html>

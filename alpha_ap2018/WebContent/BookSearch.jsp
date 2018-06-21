@@ -6,27 +6,27 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>‘ ‘ŒŸõ</title>
+<title>è”µæ›¸æ¤œç´¢</title>
 </head>
 <body>
 
-	<form action="BookManagement" method="get"><input type="submit" name="button" value="‘Ð‚Ì’Ç‰Á"/></form>
-	<h1>‘ ‘ŒŸõ</h1>
+	<form action="BookManagement" method="get"><input type="submit" name="button" value="æ›¸ç±ã®è¿½åŠ "/></form>
+	<h1>è”µæ›¸æ¤œç´¢</h1>
 	<form action="BookSearch" method="post" >
-		ƒ^ƒCƒgƒ‹:<input type="text" name="title" value="${requestScope.title}" />
-		ìŽÒ:<input type="text" name="author" value="${requestScope.author}" />
-		o”ÅŽÐ:<input type="text" name="publisher" value="${requestScope.publisher}" />
-		‰È–Ú:<input type="text" name="subject" value="${requestScope.subject}" />
-		<input type="submit" name="button" value="ŒŸõ" />
+		ã‚¿ã‚¤ãƒˆãƒ«:<input type="text" name="title" value="${requestScope.title}" />
+		ä½œè€…:<input type="text" name="author" value="${requestScope.author}" />
+		å‡ºç‰ˆç¤¾:<input type="text" name="publisher" value="${requestScope.publisher}" />
+		ç§‘ç›®:<input type="text" name="subject" value="${requestScope.subject}" />
+		<input type="submit" name="button" value="æ¤œç´¢" />
 		<input type="submit" name="button" value="RESET" />
 	</form>
 	<c:choose>
 		<c:when test="${requestScope.bookList != null}">
-		<h2>ŒŸõŒ‹‰Ê</h2>
-		<table border="1" summary="ŒŸõŒ‹‰Ê" >
+		<h2>æ¤œç´¢çµæžœ</h2>
+		<table border="1" summary="æ¤œç´¢çµæžœ" >
 			<tr>
-				<th>ƒ^ƒCƒgƒ‹</th>
-				<th>ìŽÒ</th>
+				<th>ã‚¿ã‚¤ãƒˆãƒ«</th>
+				<th>ä½œè€…</th>
 				<th></th>
 			</tr>
 			<c:forEach var="book" items="${requestScope.bookList}">
@@ -36,7 +36,7 @@
 					<td>
 						<form action="BookManagement" method="get" >
 							<input type="hidden" name="label" value="${book.label}" />
-							<input type="submit" name="button" value="Ú×" />
+							<input type="submit" name="button" value="è©³ç´°" />
 						</form>
 					</td>
 				</tr>
@@ -44,9 +44,9 @@
 		</table>
 	</c:when>
 	<c:otherwise>
-		<p>ŠY“–‚·‚é–{‚Í‚ ‚è‚Ü‚¹‚ñ</p>
+		<p>è©²å½“ã™ã‚‹æœ¬ã¯ã‚ã‚Šã¾ã›ã‚“</p>
 	</c:otherwise>
 	</c:choose>
-	<a href="/LibrarySystem/BookSearch">–ß‚é(–¢ŽÀ‘•)</a>
+	<a href="/LibrarySystem/BookSearch">æˆ»ã‚‹(æœªå®Ÿè£…)</a>
 </body>
 </html>

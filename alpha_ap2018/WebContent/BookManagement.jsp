@@ -6,39 +6,39 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>���Џ��</title>
+<title>書籍情報</title>
 </head>
 <body>
 
 	<div style="width:200px;height:250px;background:#ffcccc;
 border:#ff0000 solid 1px;float:left;">
-	<img src="${bookData.imagePath}" width="200" height="250" alt="���e"/>
+	<img src="${bookData.imagePath}" width="200" height="250" alt="書影"/>
 	</div>
 	<div style="padding:50px;">
 	<form action="BookManagement" method="post">
-		<table border="1" summary="���Џ��">
+		<table border="1" summary="書籍情報">
 			<tr>
-				<td>���ʃ��x��</td>
+				<td>識別ラベル</td>
 				<td>${bookData.label}</td>
-				<td>�^�C�g��</td>
+				<td>タイトル</td>
 				<td><input type="text" name="title" value="${bookData.title}"/></td>
 			</tr>
 			<tr>
-				<td>���</td>
+				<td>作者</td>
 				<td><input type="text" name="author" value="${bookData.author}"/></td>
-				<td>�o�Ŏ�</td>
+				<td>出版社</td>
 				<td><input type="text" name="publisher" value="${bookData.publisher}"/></td>
 			</tr>
 			<tr>
-				<td>�o�ŔN</td>
+				<td>出版年</td>
 				<td><input type="text" name="publicationYear" value="${bookData.publicationYear}"/></td>
-				<td>�݌ɐ�</td>
+				<td>在庫数</td>
 				<td><input type="text" name="stockNum" value="${bookData.stockNum}"/></td>
 			</tr>
 			<tr>
-				<td>�Ȗږ�</td>
+				<td>科目名</td>
 				<td><input type="text" name="subjectName" value="${subName}" /></td>
-				<td>�摜�p�X</td>
+				<td>画像パス</td>
 				<td><input type="text" name="imagePath" value="${bookData.imagePath}"/></td>
 			</tr>
 			<tr>
@@ -47,14 +47,14 @@ border:#ff0000 solid 1px;float:left;">
 			<tr>
 				<td colspan="4">
 					<input type="hidden" name="label" value="${bookData.label}" />
-					<button type="submit" name="button" value="�ڍ�">RESET</button>
-					�@�@�@<input type="submit" name="button" value="�X�V" />
-					�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@<input type="submit" name="button" value="�폜"/>
+					<button type="submit" name="button" value="詳細">RESET</button>
+					　　　<input type="submit" name="button" value="更新" />
+					　　　　　　　　　　　　　　　　　　　　　　　<input type="submit" name="button" value="削除"/>
 				</td>
 			</tr>
 		</table>
 	</form>
 	</div>
-	<a href="/LibrarySystem/BookSearch">�߂�</a>
+	<a href="/LibrarySystem/BookSearch">戻る</a>
 </body>
 </html>

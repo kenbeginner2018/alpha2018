@@ -56,7 +56,7 @@ public class SubjectDAO {
 		return subName;
 	}
 
-	//w’è‚³‚ê‚½‰È–Ú–¼‚ª‰È–Úƒe[ƒuƒ‹‚É‘¶İ‚·‚é‚©Šm”F‚·‚é
+	//æŒ‡å®šã•ã‚ŒãŸç§‘ç›®åãŒç§‘ç›®ãƒ†ãƒ¼ãƒ–ãƒ«ã«å­˜åœ¨ã™ã‚‹ã‹ç¢ºèªã™ã‚‹
 	public boolean checkSubjectName(String subName) throws SQLException {
 
 		String sql=null;

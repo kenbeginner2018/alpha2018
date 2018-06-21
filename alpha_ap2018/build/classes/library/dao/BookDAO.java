@@ -21,7 +21,7 @@ public class BookDAO {
 		connection = DriverManager.getConnection(url, user, password);
 	}
 
-	// Library_DBƒf[ƒ^ƒx[ƒX‚Æ‚ÌÚ‘±‚ğØ’f‚·‚é
+	// Library_DBãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ã¨ã®æ¥ç¶šã‚’åˆ‡æ–­ã™ã‚‹
 	public void close() {
 		try {
 			if(connection != null) {
@@ -33,19 +33,19 @@ public class BookDAO {
 	}
 
 	public List<BookBean> getAllBookData() throws SQLException{
-		// TODO ©“®¶¬‚³‚ê‚½ƒƒ\ƒbƒhEƒXƒ^ƒu
+		// TODO è‡ªå‹•ç”Ÿæˆã•ã‚ŒãŸãƒ¡ã‚½ãƒƒãƒ‰ãƒ»ã‚¹ã‚¿ãƒ–
 		List<BookBean> bookList = new ArrayList<BookBean>();
 		BookBean bookBean = null;
 		PreparedStatement pstatement = null;
 		ResultSet rs = null;
 		try {
-			// SQL‚ğ•Û‚·‚é
+			// SQLã‚’ä¿æŒã™ã‚‹
 			String sql = "SELECT * FROM BOOKTABLE";
 			pstatement = connection.prepareStatement(sql);
-			// SQL•¶”­s
+			// SQLæ–‡ç™ºè¡Œ
 			rs = pstatement.executeQuery();
 			while(rs.next()) {
-				// —ñ–¼‚ğw’è‚µ‚Ä’l‚ğæ“¾
+				// åˆ—åã‚’æŒ‡å®šã—ã¦å€¤ã‚’å–å¾—
 				bookBean = new BookBean();
 				bookBean.setLabel(rs.getString("LABEL"));
 				bookBean.setTitle(rs.getString("TITLE"));
@@ -57,23 +57,23 @@ public class BookDAO {
 				bookBean.setStockNum(rs.getInt("STOCKNUM"));
 				bookList.add(bookBean);
 			}
-			// Œ‹‰ÊƒIƒuƒWƒFƒNƒg‚ÌŠJ•ú
+			// çµæœã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®é–‹æ”¾
 			rs.close();
 		} finally {
-			// PreparedƒIƒuƒWƒFƒNƒg‚ÌŠJ•ú
+			// Preparedã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®é–‹æ”¾
 			pstatement.close();
 		}
 		return bookList;
 	}
 
 	public List<BookBean> getBookDataByInput(String title, String author, String publisher, String subject) throws SQLException{
-		// Œ‹‰Ê‚ğ•Ô‚·—p
+		// çµæœã‚’è¿”ã™ç”¨
 		List<BookBean> bookList = new ArrayList<BookBean>();
 		BookBean bookBean = null;
 		PreparedStatement pstatement = null;
 		ResultSet rs = null;
 		try {
-			// SQL‚ğ•Û‚·‚é
+			// SQLã‚’ä¿æŒã™ã‚‹
 			String sql = "SELECT * FROM BOOKTABLE";
 			int flug=0;
 			if((title!=null&&!title.equals(""))||(author!=null&&!author.equals(""))||
@@ -107,10 +107,10 @@ public class BookDAO {
 				}
 			}
 			pstatement = connection.prepareStatement(sql);
-			// SQL•¶”­s
+			// SQLæ–‡ç™ºè¡Œ
 			rs = pstatement.executeQuery();
 			while(rs.next()) {
-				// —ñ–¼‚ğw’è‚µ‚Ä’l‚ğæ“¾
+				// åˆ—åã‚’æŒ‡å®šã—ã¦å€¤ã‚’å–å¾—
 				bookBean = new BookBean();
 				bookBean.setLabel(rs.getString("LABEL"));
 				bookBean.setTitle(rs.getString("TITLE"));
@@ -122,10 +122,10 @@ public class BookDAO {
 				bookBean.setStockNum(rs.getInt("STOCKNUM"));
 				bookList.add(bookBean);
 			}
-			// Œ‹‰ÊƒIƒuƒWƒFƒNƒg‚ÌŠJ•ú
+			// çµæœã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®é–‹æ”¾
 			rs.close();
 		} finally {
-			// PreparedƒIƒuƒWƒFƒNƒg‚ÌŠJ•ú
+			// Preparedã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®é–‹æ”¾
 			pstatement.close();
 		}
 		if(bookList.size() == 0) {
@@ -135,7 +135,7 @@ public class BookDAO {
 	}
 
 	public BookBean getBookBean(String label) throws SQLException {
-		// TODO ©“®¶¬‚³‚ê‚½ƒƒ\ƒbƒhEƒXƒ^ƒu
+		// TODO è‡ªå‹•ç”Ÿæˆã•ã‚ŒãŸãƒ¡ã‚½ãƒƒãƒ‰ãƒ»ã‚¹ã‚¿ãƒ–
 
 		BookBean bookBean = null;
 		PreparedStatement pstatement = null;
@@ -156,7 +156,7 @@ public class BookDAO {
 			bookBean.setImagePath(rs.getString("IMAGEFILENAME"));
 			bookBean.setStockNum(rs.getInt("STOCKNUM"));
 		} finally {
-			// PreparedƒIƒuƒWƒFƒNƒg‚ÌŠJ•ú
+			// Preparedã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®é–‹æ”¾
 			rs.close();
 			pstatement.close();
 		}
@@ -165,23 +165,23 @@ public class BookDAO {
 
 	public void renewBookData(String label,String title, String author, String publisher, String publicationYear,
 			String stockNum, String subName, String imagePath) throws SQLException {
-		// TODO ©“®¶¬‚³‚ê‚½ƒƒ\ƒbƒhEƒXƒ^ƒu
+		// TODO è‡ªå‹•ç”Ÿæˆã•ã‚ŒãŸãƒ¡ã‚½ãƒƒãƒ‰ãƒ»ã‚¹ã‚¿ãƒ–
 		PreparedStatement pstatement = null;
 		String sql="UPDATE BOOKTABLE SET title=?,author=?,publisher=?,publicationYear=?,"
 				+ "stockNum=?,subjectId=?,IMAGEFILENAME=? WHERE label=?";
 		int subId=-1;
 		try {
-			//‰È–Ú–¼‚Í“ü—Í‚³‚ê‚Ä‚¢‚é‚©H
+			//ç§‘ç›®åã¯å…¥åŠ›ã•ã‚Œã¦ã„ã‚‹ã‹ï¼Ÿ
 			if(subName!=null&&!subName.equals("")) {
 
-				//‚»‚Ì‰È–Ú‚ªƒf[ƒ^ƒx[ƒX‚É“o˜^‚³‚ê‚Ä‚¢‚é‚©Šm”F‚·‚é
+				//ãã®ç§‘ç›®ãŒãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ã«ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ã‹ç¢ºèªã™ã‚‹
 				SubjectDAO subDAO = new SubjectDAO();
 				if(subDAO.checkSubjectName(subName)) {
 
-					//“ü—Í‚³‚ê‚½‰È–Ú‚ª‘¶İ‚µ‚½ê‡‚Í‚»‚ÌID‚ğæ“¾
+					//å…¥åŠ›ã•ã‚ŒãŸç§‘ç›®ãŒå­˜åœ¨ã—ãŸå ´åˆã¯ãã®IDã‚’å–å¾—
 					subId=subDAO.getSubjectId(subName);
 				}
-			//‰È–Ú–¼‚ª‹ó”’,‚à‚µ‚­‚Í‘¶İ‚µ‚È‚¢‰È–Ú–¼‚ª“ü—Í‚³‚ê‚Ä‚¢‚½ê‡‚ÍsubjectID=-1‚Æ‚·‚é
+			//ç§‘ç›®åãŒç©ºç™½,ã‚‚ã—ãã¯å­˜åœ¨ã—ãªã„ç§‘ç›®åãŒå…¥åŠ›ã•ã‚Œã¦ã„ãŸå ´åˆã¯subjectID=-1ã¨ã™ã‚‹
 			}
 			pstatement = connection.prepareStatement(sql);
 			pstatement.setString(1,title);
@@ -199,7 +199,7 @@ public class BookDAO {
 	}
 
 	public void deleteBookData(String label) throws SQLException {
-		// TODO ©“®¶¬‚³‚ê‚½ƒƒ\ƒbƒhEƒXƒ^ƒu
+		// TODO è‡ªå‹•ç”Ÿæˆã•ã‚ŒãŸãƒ¡ã‚½ãƒƒãƒ‰ãƒ»ã‚¹ã‚¿ãƒ–
 
 		PreparedStatement pstatement = null;
 		try {
@@ -214,22 +214,22 @@ public class BookDAO {
 
 	public void addBookData(String label,String title, String author, String publisher, String publicationYear,
 			String stockNum, String subName, String imagePath) throws SQLException{
-		// TODO ©“®¶¬‚³‚ê‚½ƒƒ\ƒbƒhEƒXƒ^ƒu
+		// TODO è‡ªå‹•ç”Ÿæˆã•ã‚ŒãŸãƒ¡ã‚½ãƒƒãƒ‰ãƒ»ã‚¹ã‚¿ãƒ–
 
 		PreparedStatement pstatement = null;
 		int subId=-1;
 		try {
-			//‰È–Ú–¼‚Í“ü—Í‚³‚ê‚Ä‚¢‚é‚©H
+			//ç§‘ç›®åã¯å…¥åŠ›ã•ã‚Œã¦ã„ã‚‹ã‹ï¼Ÿ
 			if(subName!=null&&!subName.equals("")) {
 
-				//‚»‚Ì‰È–Ú‚ªƒf[ƒ^ƒx[ƒX‚É“o˜^‚³‚ê‚Ä‚¢‚é‚©Šm”F‚·‚é
+				//ãã®ç§‘ç›®ãŒãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ã«ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ã‹ç¢ºèªã™ã‚‹
 				SubjectDAO subDAO =new SubjectDAO();
 				if(subDAO.checkSubjectName(subName)) {
 
-					//“ü—Í‚³‚ê‚½‰È–Ú‚ª‘¶İ‚µ‚½ê‡‚Í‚»‚ÌID‚ğæ“¾
+					//å…¥åŠ›ã•ã‚ŒãŸç§‘ç›®ãŒå­˜åœ¨ã—ãŸå ´åˆã¯ãã®IDã‚’å–å¾—
 					subId=subDAO.getSubjectId(subName);
 				}
-			//‰È–Ú–¼‚ª‹ó”’,‚à‚µ‚­‚Í‘¶İ‚µ‚È‚¢‰È–Ú–¼‚ª“ü—Í‚³‚ê‚Ä‚¢‚½ê‡‚ÍsubjectID=-1‚Æ‚·‚é
+			//ç§‘ç›®åãŒç©ºç™½,ã‚‚ã—ãã¯å­˜åœ¨ã—ãªã„ç§‘ç›®åãŒå…¥åŠ›ã•ã‚Œã¦ã„ãŸå ´åˆã¯subjectID=-1ã¨ã™ã‚‹
 			}
 			String sql ="insert into booktable values(?,?,?,?,?,?,?,?)";
 			pstatement = connection.prepareStatement(sql);

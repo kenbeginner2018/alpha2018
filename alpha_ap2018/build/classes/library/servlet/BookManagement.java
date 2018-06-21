@@ -15,9 +15,6 @@ import library.bean.BookBean;
 import library.dao.BookDAO;
 import library.dao.SubjectDAO;
 
-
-//RESETƒ{ƒ^ƒ“‚âXVƒ{ƒ^ƒ“‚ð‰Ÿ‚µ‚½‚Æ‚«‰E‚Ì‚æ‚¤‚ÈƒGƒ‰[‚ª•\Ž¦‚³‚ê‚éiˆÓ}‚µ‚½“®ìŽ©‘Ì‚Í³í‚É‚È‚³‚ê‚Ä‚¢‚éj@d‘å: ƒT[ƒuƒŒƒbƒg library.servlet.BookManagement ‚ÌServlet.service()‚ª—áŠO‚ð“Š‚°‚Ü‚µ‚½ [… 6 20 16:18:00 JST 2018]
-
 /**
  * Servlet implementation class BookManagement
  */
@@ -40,11 +37,11 @@ public class BookManagement extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		String button = request.getParameter("button");
-		if(button.equals("‘Ð‚Ì’Ç‰Á")) {
+		if(button.equals("æ›¸ç±ã®è¿½åŠ ")) {
 			ServletContext context = getServletContext();
 			RequestDispatcher rd = context.getRequestDispatcher("/AddBook.jsp");
 			rd.forward(request, response);
-		}else if(button.equals("Ú×")) {
+		}else if(button.equals("è©³ç´°")) {
 			BookBean bbn = new BookBean();
 			String subName="";
 			try {
@@ -53,7 +50,7 @@ public class BookManagement extends HttpServlet {
 				SubjectDAO subDAO = new SubjectDAO();
 				subName=subDAO.getSubjectName(bbn.getSubjectId());
 			} catch (SQLException e) {
-				// TODO Ž©“®¶¬‚³‚ê‚½ catch ƒuƒƒbƒN
+				// TODO è‡ªå‹•ç”Ÿæˆã•ã‚ŒãŸ catch ãƒ–ãƒ­ãƒƒã‚¯
 				e.printStackTrace();
 			}
 			request.setAttribute("bookData",bbn);
@@ -75,27 +72,27 @@ public class BookManagement extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		String button = request.getParameter("button");
-		if(button.equals("Ú×")) {
+		if(button.equals("è©³ç´°")) {
 			doGet(request,response);
-		} else if(button.equals("XV")){
+		} else if(button.equals("æ›´æ–°")){
 			try {
 				BookDAO bookDAO = new BookDAO();
 				bookDAO.renewBookData(request.getParameter("label"),request.getParameter("title"),request.getParameter("author"),
 					request.getParameter("publisher"),request.getParameter("publicationYear"),
 					request.getParameter("stockNum"),request.getParameter("subName"),request.getParameter("imagePath"));
 			} catch (SQLException e) {
-				// TODO Ž©“®¶¬‚³‚ê‚½ catch ƒuƒƒbƒN
+				// TODO è‡ªå‹•ç”Ÿæˆã•ã‚ŒãŸ catch ãƒ–ãƒ­ãƒƒã‚¯
 				e.printStackTrace();
 			}
 			doGet(request,response);
-		} else if(button.equals("íœ")) {
+		} else if(button.equals("å‰Šé™¤")) {
 			try {
 				BookDAO bookDAO = new BookDAO();
 				bookDAO.deleteBookData(request.getParameter("label"));
 			}catch(SQLException e) {
 				e.printStackTrace();
 			}
-		} else if(button.equals("’Ç‰Á")){
+		} else if(button.equals("è¿½åŠ ")){
 			try {
 				BookDAO bookDAO = new BookDAO();
 				bookDAO.addBookData(request.getParameter("label"),request.getParameter("title"),request.getParameter("author"),
@@ -105,7 +102,7 @@ public class BookManagement extends HttpServlet {
 				e.printStackTrace();
 			}
 		}else{
-			System.out.println("ƒ{ƒ^ƒ“”»’èƒGƒ‰[");
+			System.out.println("ãƒœã‚¿ãƒ³åˆ¤å®šã‚¨ãƒ©ãƒ¼");
 		}
 		ServletContext context = getServletContext();
 		RequestDispatcher rd = context.getRequestDispatcher("/BookSearch.jsp");
