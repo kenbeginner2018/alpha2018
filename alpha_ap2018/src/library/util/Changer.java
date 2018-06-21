@@ -1,7 +1,11 @@
 package library.util;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import library.bean.DeptBean;
@@ -48,4 +52,24 @@ public class Changer {
 		// 該当学部ID無し
 		return -1;
 	}
+
+	//返却予定日から延長返却日を取得
+	public String rentalDateToExtendDate(String rentalDate) {
+		//返却日を延長
+		Calendar calender = new GregorianCalendar();
+
+			SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
+	        Date date = null;
+			try {
+				date = sdFormat.parse(rentalDate);
+			} catch (java.text.ParseException e) {
+				e.printStackTrace();
+			}
+		    calender.setTime(date);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+			calender.add(Calendar.DAY_OF_MONTH, +14);
+			String time= sdf.format(calender.getTime());
+
+			return time ;
+		}
 }
