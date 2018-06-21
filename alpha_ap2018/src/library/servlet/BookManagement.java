@@ -39,7 +39,7 @@ public class BookManagement extends HttpServlet {
 		String button = request.getParameter("button");
 		if(button.equals("書籍の追加")) {
 			ServletContext context = getServletContext();
-			RequestDispatcher rd = context.getRequestDispatcher("/AddBook.jsp");
+			RequestDispatcher rd = context.getRequestDispatcher("/addBook.jsp");
 			rd.forward(request, response);
 		}else if(button.equals("詳細")) {
 			BookBean bbn = new BookBean();
