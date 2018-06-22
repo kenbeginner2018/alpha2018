@@ -10,6 +10,7 @@
 	<title>大学の図書管理システム</title>
 </head>
 <body>
+	<a href="admin">メニュー画面へ戻る</a>
 	<h1>ID検索</h1>
 	<form action="userlist" method="post">
 		<input type="text" name="searchId" />
