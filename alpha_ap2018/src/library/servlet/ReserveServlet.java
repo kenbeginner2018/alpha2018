@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import library.bean.ReserveBean;
+import library.checker.LoginChecker;
 import library.dao.ReserveDAO;
 import library.util.Changer;
 
@@ -25,27 +26,35 @@ public class ReserveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 予約状況一覧格納用
-		List<ReserveBean> reserveList = new ArrayList<ReserveBean>();
-		// 予約状況一覧を取得する
-		try {
-			ReserveDAO reserveDAO = new ReserveDAO();
-			reserveList = reserveDAO.getAllReserveData();
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
+
+		// ログイン確認
+		LoginChecker loginChecker = new LoginChecker();
+		if(!loginChecker.checkLogin(request)) { // ログインしていない
+			// ログイン画面に飛ばす処理
+			response.sendRedirect("login");
+		} else {
+			// 予約状況一覧格納用
+			List<ReserveBean> reserveList = new ArrayList<ReserveBean>();
+			// 予約状況一覧を取得する
+			try {
+				ReserveDAO reserveDAO = new ReserveDAO();
+				reserveList = reserveDAO.getAllReserveData();
+			} catch (SQLException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
+			request.setAttribute("reserveList", reserveList);
+
+
+			Changer changer = new Changer();
+			request.setAttribute("changer", changer);
+
+
+			// JSPに遷移
+			ServletContext context = getServletContext();
+			RequestDispatcher rd = context.getRequestDispatcher("/Reserve.jsp"); // 転送先のURL
+			rd.forward(request, response);
 		}
-		request.setAttribute("reserveList", reserveList);
-
-
-		Changer changer = new Changer();
-		request.setAttribute("changer", changer);
-
-
-		// JSPに遷移
-		ServletContext context = getServletContext();
-		RequestDispatcher rd = context.getRequestDispatcher("/Reserve.jsp"); // 転送先のURL
-		rd.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

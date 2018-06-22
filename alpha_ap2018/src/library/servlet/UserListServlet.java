@@ -28,22 +28,21 @@ public class UserListServlet extends HttpServlet {
 		// ログイン確認
 		LoginChecker loginChecker = new LoginChecker();
 		if(!loginChecker.checkLogin(request)) { // ログインしていない
-			/* TODO
-			 * ログイン画面に飛ばす処理
-			 */
-		}
+			// ログイン画面に飛ばす処理
+			response.sendRedirect("login");
+		} else {
+			try {
+				// ユーザ一覧表示
+				userListService.init(request);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 
-		try {
-			// ユーザ一覧表示
-			userListService.init(request);
-		} catch (SQLException e) {
-			e.printStackTrace();
+			// JSPに遷移
+			ServletContext context = getServletContext();
+			RequestDispatcher rd = context.getRequestDispatcher("/userlist.jsp"); // 転送先のURL
+			rd.forward(request, response);
 		}
-
-		// JSPに遷移
-		ServletContext context = getServletContext();
-		RequestDispatcher rd = context.getRequestDispatcher("/userlist.jsp"); // 転送先のURL
-		rd.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import library.bean.RentalBean;
+import library.checker.LoginChecker;
 import library.dao.RentalDao;
 import library.util.Changer;
 /**
@@ -36,28 +37,33 @@ public class ReturnServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		// ログイン確認
+		LoginChecker loginChecker = new LoginChecker();
+		if(!loginChecker.checkLogin(request)) { // ログインしていない
+			// ログイン画面に飛ばす処理
+			response.sendRedirect("login");
+		} else {
+			List<RentalBean> rentalList = new ArrayList<RentalBean>();	// レンタルBean格納変数
+			Changer changer = new Changer();							//Changerインスタンス生成
 
-		List<RentalBean> rentalList = new ArrayList<RentalBean>();	// レンタルBean格納変数
-		Changer changer = new Changer();							//Changerインスタンス生成
+			String  labelId = request.getParameter("labelId");
+			String userId = request.getParameter("userId");
 
-		String  labelId = request.getParameter("labelId");
-		String userId = request.getParameter("userId");
+			try {
+				RentalDao rentalDao = new RentalDao();
+				rentalList = rentalDao.getRental(labelId,userId);		//戻り値でBeanのリストを取得
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 
-		try {
-			RentalDao rentalDao = new RentalDao();
-			rentalList = rentalDao.getRental(labelId,userId);		//戻り値でBeanのリストを取得
-		} catch (SQLException e) {
-			e.printStackTrace();
+			request.setAttribute("RentalList", rentalList);				//requestにrentalListを登録
+			request.setAttribute("Changer", changer);
+
+			//JSPへの転送
+			ServletContext context = getServletContext();
+			RequestDispatcher dispatcher = context.getRequestDispatcher("/Return.jsp");
+			dispatcher.forward(request,  response);
 		}
-
-		request.setAttribute("RentalList", rentalList);				//requestにrentalListを登録
-		request.setAttribute("Changer", changer);
-
-		//JSPへの転送
-		ServletContext context = getServletContext();
-		RequestDispatcher dispatcher = context.getRequestDispatcher("/Return.jsp");
-		dispatcher.forward(request,  response);
-
 	}
 
 	/**
@@ -83,7 +89,7 @@ public class ReturnServlet extends HttpServlet {
 			}else {
 				request.setAttribute("message","返却処理に失敗しました");
 			}
-			
+
 			ServletContext context = getServletContext();
 			RequestDispatcher dispatcher = context.getRequestDispatcher("/Return.jsp");
 			dispatcher.forward(request,  response);

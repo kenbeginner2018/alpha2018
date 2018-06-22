@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import library.bean.RequestBean;
+import library.checker.LoginChecker;
 import library.dao.RequestListDAO;
 import library.util.Changer;
 
@@ -25,27 +26,35 @@ public class RequestListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// リクエスト一覧格納用
-		List<RequestBean> requestList = new ArrayList<RequestBean>();
-		// リクエスト一覧を取得する
-		try {
-			RequestListDAO requestListDAO = new RequestListDAO();
-			requestList = requestListDAO.getAllRequestData();
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
+
+		// ログイン確認
+		LoginChecker loginChecker = new LoginChecker();
+		if(!loginChecker.checkLogin(request)) { // ログインしていない
+			// ログイン画面に飛ばす処理
+			response.sendRedirect("login");
+		} else {
+			// リクエスト一覧格納用
+			List<RequestBean> requestList = new ArrayList<RequestBean>();
+			// リクエスト一覧を取得する
+			try {
+				RequestListDAO requestListDAO = new RequestListDAO();
+				requestList = requestListDAO.getAllRequestData();
+			} catch (SQLException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
+			request.setAttribute("requestList", requestList);
+
+
+			Changer changer = new Changer();
+			request.setAttribute("changer", changer);
+
+
+			// JSPに遷移
+			ServletContext context = getServletContext();
+			RequestDispatcher rd = context.getRequestDispatcher("/RequestList.jsp"); // 転送先のURL
+			rd.forward(request, response);
 		}
-		request.setAttribute("requestList", requestList);
-
-
-		Changer changer = new Changer();
-		request.setAttribute("changer", changer);
-
-
-		// JSPに遷移
-		ServletContext context = getServletContext();
-		RequestDispatcher rd = context.getRequestDispatcher("/RequestList.jsp"); // 転送先のURL
-		rd.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
