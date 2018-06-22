@@ -2,6 +2,8 @@ package library.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -41,7 +43,7 @@ public class BookManagement extends HttpServlet {
 		RequestDispatcher rd =context.getRequestDispatcher("/error.jsp");
 		if(button.equals("書籍の追加")) {
 			rd = context.getRequestDispatcher("/addBook.jsp");
-		}else if(button.equals("詳細")) {
+		}else if(button.equals("詳細")||button.equals("更新")) {
 			BookBean bbn = new BookBean();
 			String subName="";
 			try {
@@ -103,6 +105,18 @@ public class BookManagement extends HttpServlet {
 		}else{
 			System.out.println("ボタン判定エラー");
 		}
+
+		// ユーザー一覧格納用
+		List<BookBean> bookList = new ArrayList<BookBean>();
+		// ユーザー一覧を取得する
+		try {
+			BookDAO bookDAO = new BookDAO();
+			bookList = bookDAO.getAllBookData();
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+		request.setAttribute("bookList", bookList);
 		ServletContext context = getServletContext();
 		RequestDispatcher rd = context.getRequestDispatcher("/BookSearch.jsp");
 		rd.forward(request, response);

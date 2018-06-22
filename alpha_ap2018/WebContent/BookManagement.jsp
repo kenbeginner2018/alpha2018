@@ -49,7 +49,7 @@ border:#ff0000 solid 1px;float:left;">
 					<input type="hidden" name="label" value="${bookData.label}" />
 					<button type="submit" name="button" value="詳細">RESET</button>
 					　　　<input type="submit" name="button" value="更新" />
-					　　　　　　　　　　　　　　　　　　　　　　　<input type="submit" name="button" value="削除"/>
+					　　　　　　　　　　　　　　　　　<input type="submit" name="button" value="削除"/>
 				</td>
 			</tr>
 		</table>
