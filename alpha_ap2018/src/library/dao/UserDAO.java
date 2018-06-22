@@ -54,7 +54,7 @@ public class UserDAO {
 				// TODO WING
 				userBean.setBorrowNum(rs.getInt("BORROWNUM"));
 				// TODO DEPARTMENT
-				userBean.setDeptId(rs.getInt("DEPT"));
+				userBean.setDeptId(rs.getInt("DEPTID"));
 				userBean.setName(rs.getString("NAME"));
 				userBean.setGrade(rs.getInt("GRADE"));
 				// TODO I → A
@@ -131,7 +131,7 @@ public class UserDAO {
 				// TODO WING
 				userBean.setBorrowNum(rs.getInt("BORROWNUM"));
 				// TODO DEPARTMENT
-				userBean.setDeptId(rs.getInt("DEPT"));
+				userBean.setDeptId(rs.getInt("DEPTID"));
 				userBean.setName(rs.getString("NAME"));
 				userBean.setGrade(rs.getInt("GRADE"));
 				// TODO I → A
