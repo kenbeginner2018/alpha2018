@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import library.checker.LoginChecker;
+import library.service.LogoutExecuter;
 
 /**
  * Servlet implementation class AdminServlet
@@ -36,68 +37,20 @@ public class AdminServlet extends HttpServlet {
 		    	rd.forward(request, response);
 		}
 
-
-		// 遷移先のサーブレットを決める文字列
-
-/*
-		RequestDispatcher login = null;
-    	login = getServletConfig().getServletContext().getRequestDispatcher("/login");
-    	login.forward(request, response);
-
-    	RequestDispatcher booksearch = null;
-    	booksearch = getServletConfig().getServletContext().getRequestDispatcher("/BookSearch");
-    	booksearch.forward(request, response);
-
-    	RequestDispatcher rentalservlet = null;
-    	rentalservlet = getServletConfig().getServletContext().getRequestDispatcher("/RentalServlet");
-    	rentalservlet.forward(request, response);
-
-    	RequestDispatcher reserve = null;
-    	reserve = getServletConfig().getServletContext().getRequestDispatcher("/Reserve");
-    	reserve.forward(request, response);
-
-    	RequestDispatcher requestlistservlet = null;
-    	requestlistservlet = getServletConfig().getServletContext().getRequestDispatcher("/RequestListServlet");
-    	requestlistservlet.forward(request, response);
-*/
-
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-/*	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 文字コード指定
+		request.setCharacterEncoding("UTF-8");
 
-		String servlet = null;
-
-		servlet = request.getParameter("RentalServlet");
-
-		servlet = request.getParameter("name");
-
-		if(request.getParameter("userList") != null ){
-			servlet = "/login";
-		}else if(request.getParameter("RentalServlet") != null ){
-			servlet = "/BookSearch";
-		}else if(request.getParameter("RentalServlet") != null ){
-			servlet = "/ReturnServlet";
-		}else if(request.getParameter("RentalServlet") != null ){
-			servlet = "/Reserve";
-		}else if(request.getParameter("RentalServlet") != null ){
-			servlet = "/RequestListServlet";
-		}else if(request.getParameter("name") == "ReturnServlet") {
-			servlet = "/ReturnServlet";
+		if(request.getParameter("btn").equals("ログアウト")) {
+			// ログアウトしてログイン画面へ遷移
+			LogoutExecuter logout = new LogoutExecuter();
+			logout.LogoutExecute(request, response);
 		}
-
-
-		ServletContext context = getServletContext();
-		RequestDispatcher dispatcher = context.getRequestDispatcher(servlet);
-		dispatcher.forward(request,  response);
-
-		//RequestDispatcher rd = null;
-		  //  	rd = getServletConfig().getServletContext().getRequestDispatcher("/ReturnServlet");
-		  //  	rd = getServletConfig().getServletContext().getRequestDispatcher(servlet);
-		    //	rd.forward(request, response);
-
-	}*/
+	}
 
 }

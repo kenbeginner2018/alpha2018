@@ -10,6 +10,10 @@
 <body>
 <div style="width:125px;margin:auto;">
 
+
+	<form action="admin" method="post">
+		<input type="submit" name="btn" value="ログアウト" />
+	</form>
 	<h1>メニュー</h1>
     <div>
     		<p>

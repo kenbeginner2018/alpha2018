@@ -66,37 +66,6 @@ public class LoginServlet extends HttpServlet {
 	    	}
 	  }
 
-	    /*String formun = request.getParameter("username");
-	    String formps = request.getParameter("password");
-
-	    ub.setUserId(formun);
-	    ub.setUserPw(formps);
-
-	    /*
-	    UserBean uab = null;
-	    uab = new UserBean();
-
-	    HttpSession session = null;
-	    RequestDispatcher rd = null;
-	    if (uab.execute() == true) {
-	      //認証に成功
-	      //セッションオブジェクトを作成
-	      if (checkSession(request) == true) {
-	        //セッションオブジェクトがある場合は獲得
-	        session = request.getSession(false);
-	      } else {
-	        //セッションオブジェクトがない場合は新規作成
-	        session = request.getSession(true);
-	      }
-	      //Beansをセッションオブジェクトに保存
-	      session.setAttribute("userbeanses", ub);
-	      rd = getServletConfig().getServletContext().getRequestDispatcher("/Login.jsp");
-	    } else {
-	      //認証に失敗
-	      rd = getServletConfig().getServletContext().getRequestDispatcher("/Admin.jsp");
-	    }
-	    	rd.forward(request, response);
-	  	}
 
 /** Returns a short description of the servlet. */
   public String getServletInfo() {
