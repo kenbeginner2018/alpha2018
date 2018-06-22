@@ -8,7 +8,6 @@ public class SubjectBean implements Serializable{
 	private String subjectName;
 	private String teacherName;
 	private String dept;
-	private String label;
 	private String season;
 
 	public int getSubjectId() {
@@ -34,12 +33,6 @@ public class SubjectBean implements Serializable{
 	}
 	public void setDept(String dept) {
 		this.dept = dept;
-	}
-	public String getLabel() {
-		return label;
-	}
-	public void setLabel(String label) {
-		this.label = label;
 	}
 	public String getSeason() {
 		return season;
