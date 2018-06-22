@@ -26,8 +26,9 @@
 	<hr size="2" align="center" />
 		<c:if test="${not empty requestScope.message}">	<%--messageが空でなけば表示 --%>
 			<c:out value="${message}" />
-			<p><a href="ReturnServlet">戻る</a></p>
+			<p>貸出一覧へ<a href="ReturnServlet">戻る</a></p>
 		</c:if>
+		<p>メニュー画面へ<a href="login">戻る</a></p>
 
 	<c:if test="${requestScope.RentalList != null}"><%--返却フラグの判定 --%>
 		<table border="1">

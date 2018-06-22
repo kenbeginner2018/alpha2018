@@ -59,7 +59,6 @@ public class RentalServlet extends HttpServlet {
 		calender.add(Calendar.DAY_OF_MONTH, +14);
 		time= sdf.format(calender.getTime());
 
-
 		try {
 			BookDAO bookDao = new BookDAO();
 			UserDAO userDao = new UserDAO();
