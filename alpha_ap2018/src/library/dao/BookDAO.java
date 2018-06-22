@@ -320,4 +320,28 @@ public class BookDAO {
 		}
 		return bookList;
 	}
+
+	// 識別ラベルと同名のラベルを検索
+	public boolean getBookLabel(String labelId) throws SQLException{
+
+		String sql=null;
+		PreparedStatement statement=null;
+		ResultSet rs =null;
+		boolean check=false;
+		try {
+			sql = "SELECT count(label) from booktable where label=?"; //列　テーブル　行
+			statement = connection.prepareStatement(sql);
+			statement.setString(1, labelId);
+			rs=statement.executeQuery();
+			rs.next();
+			if(rs.getInt("COUNT(LABEL)") != 0){
+				check=true;
+			}
+		}finally {
+			rs.close();
+			statement.close();
+		}
+		return check;
+	}
+
 }

@@ -150,4 +150,27 @@ public class UserDAO {
 
 		return userList;
 	}
+
+	// ユーザーIDと同名のIDを検索
+		public boolean getUserId(String userId) throws SQLException{
+
+			String sql=null;
+			PreparedStatement statement=null;
+			ResultSet rs =null;
+			boolean check=false;
+			try {
+				sql = "SELECT COUNT(USERID) FROM USERTABLE WHERE USERID=?";
+				statement = connection.prepareStatement(sql);
+				statement.setString(1, userId);
+				rs=statement.executeQuery();
+				rs.next();
+				if(rs.getInt("COUNT(USERID)") != 0){
+					check=true;
+				}
+			}finally {
+				rs.close();
+				statement.close();
+			}
+			return check;
+		}
 }
