@@ -42,16 +42,20 @@ public class SubjectDAO {
 		PreparedStatement statement=null;
 		String subName=null;
 
-		try {
-			sql = "SELECT subjectName FROM SUBJECTTABLE WHERE SUBJECTID=?";
-			statement = connection.prepareStatement(sql);
-			statement.setInt(1,subId);
-			rs = statement.executeQuery();
-			rs.next();
-			subName=rs.getString("SUBJECTNAME");
-		}finally {
-			rs.close();
-			statement.close();
+		if(subId!=-1) {
+			try {
+				sql = "SELECT subjectName FROM SUBJECTTABLE WHERE SUBJECTID=?";
+				statement = connection.prepareStatement(sql);
+				statement.setInt(1,subId);
+				rs = statement.executeQuery();
+				rs.next();
+				subName=rs.getString("SUBJECTNAME");
+			}finally {
+				rs.close();
+				statement.close();
+			}
+		}else {
+			subName="";
 		}
 		return subName;
 	}

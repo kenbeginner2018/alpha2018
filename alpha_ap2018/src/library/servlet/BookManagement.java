@@ -80,7 +80,7 @@ public class BookManagement extends HttpServlet {
 				BookDAO bookDAO = new BookDAO();
 				bookDAO.renewBookData(request.getParameter("label"),request.getParameter("title"),request.getParameter("author"),
 					request.getParameter("publisher"),request.getParameter("publicationYear"),
-					request.getParameter("stockNum"),request.getParameter("subName"),request.getParameter("imagePath"));
+					request.getParameter("stockNum"),request.getParameter("subjectName"),request.getParameter("imagePath"));
 			} catch (SQLException e) {
 				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
@@ -98,7 +98,7 @@ public class BookManagement extends HttpServlet {
 				BookDAO bookDAO = new BookDAO();
 				bookDAO.addBookData(request.getParameter("label"),request.getParameter("title"),request.getParameter("author"),
 						request.getParameter("publisher"),request.getParameter("publicationYear"),
-						request.getParameter("stockNum"),request.getParameter("subName"),request.getParameter("imagePath"));
+						request.getParameter("stockNum"),request.getParameter("subjectName"),request.getParameter("imagePath"));
 			}catch(SQLException e) {
 				e.printStackTrace();
 			}
