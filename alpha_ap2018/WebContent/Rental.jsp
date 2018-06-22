@@ -23,7 +23,7 @@
 			<c:out value="${message}" />
 
 		</c:if>
-		<p><a href="login">戻る</a></p>
+		<p><a href="login">メニュー画面へ戻る</a></p>
 
 </body>
 </html>
