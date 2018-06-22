@@ -6,11 +6,12 @@ public class RequestBean implements Serializable {
 
 	private int requestId; 		// リクエストID
 	private String userId;			// ユーザーID
-	private String requestData;    // 要望申請日
+	private String requestDate;    // 要望申請日
 	private boolean checkFlag;	// 確認フラグ
 	private String author;			// 作者名
 	private String title;			// タイトル
 	private String publisher;		// 出版社
+
 	public int getRequestId() {
 		return requestId;
 	}
@@ -23,11 +24,11 @@ public class RequestBean implements Serializable {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public String getRequestData() {
-		return requestData;
+	public String getRequestDate() {
+		return requestDate;
 	}
-	public void setRequestData(String requestData) {
-		this.requestData = requestData;
+	public void setRequestDate(String requestDate) {
+		this.requestDate = requestDate;
 	}
 	public boolean isCheckFlag() {
 		return checkFlag;

@@ -8,7 +8,8 @@ public class ReserveBean implements Serializable {
 	private String userId;		         // ユーザーID
 	private String reserveDate;	  	 // 予約日
 	private String label;	             // 識別ラベル
-	private boolean reservCheckFlag;   // 予約非表示フラグ
+	private boolean reserveCheckFlag;   // 予約非表示フラグ
+
 	public int getReserveId() {
 		return reserveId;
 	}
@@ -33,11 +34,11 @@ public class ReserveBean implements Serializable {
 	public void setLabel(String label) {
 		this.label = label;
 	}
-	public boolean isReservCheckFlag() {
-		return reservCheckFlag;
+	public boolean isReserveCheckFlag() {
+		return reserveCheckFlag;
 	}
-	public void setReservCheckFlag(boolean reservCheckFlag) {
-		this.reservCheckFlag = reservCheckFlag;
+	public void setReserveCheckFlag(boolean reserveCheckFlag) {
+		this.reserveCheckFlag = reserveCheckFlag;
 	}
 
 

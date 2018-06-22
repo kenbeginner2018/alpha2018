@@ -8,8 +8,12 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import library.bean.BookBean;
 import library.bean.DeptBean;
+import library.bean.UserBean;
+import library.dao.BookDAO;
 import library.dao.DeptDAO;
+import library.dao.UserDAO;
 
 public class Changer {
 
@@ -72,4 +76,56 @@ public class Changer {
 
 			return time ;
 		}
+
+	// ラベルを受け取ったら対応する本のタイトルにして返す
+	public String labelToTitle(String label) {
+		// 一覧格納用
+		List<BookBean> bookList = new ArrayList<BookBean>();
+			try {
+				BookDAO bookDAO = new BookDAO();
+				bookList = bookDAO.getBookDataByLabel(label);
+				return bookList.get(0).getTitle();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		// 該当無し
+			return null;
+	}
+
+	// タイトルを受け取ったら対応する本のラベルにして返す
+	public String titleTolabel(String title) {
+		// 一覧格納用
+		List<BookBean> bookList = new ArrayList<BookBean>();
+			try {
+				BookDAO bookDAO = new BookDAO();
+				bookList = bookDAO.getBookDataByTitle(title);
+				return bookList.get(0).getLabel();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		// 該当無し
+			return null;
+	}
+
+	// ユーザIDから氏名を取得する
+	public String userIdToName(String userId) {
+		// ユーザ一覧格納用
+		List<UserBean> userList = new ArrayList<UserBean>();
+			try {
+				UserDAO userDAO = new UserDAO();
+				userList = userDAO.getAllUserData();
+				for(int i = 0; i < userList.size(); i++) {
+					if(userList.get(i).getUserId().equals(userId)) {
+						return userList.get(i).getName();
+					}
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		// 該当無し
+			return null;
+	}
 }
