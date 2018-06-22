@@ -28,22 +28,21 @@ public class UserDataServlet extends HttpServlet {
 		// ログイン確認
 		LoginChecker loginChecker = new LoginChecker();
 		if(!loginChecker.checkLogin(request)) { // ログインしていない
-			/* TODO
-			 * ログイン画面に飛ばす処理
-			 */
-		}
+			// ログイン画面に飛ばす処理
+			response.sendRedirect("login");
+		} else {
+			try {
+				// 選択されたユーザの詳細情報を表示
+				userDataService.init(request);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 
-		try {
-			// 選択されたユーザの詳細情報を表示
-			userDataService.init(request);
-		} catch (SQLException e) {
-			e.printStackTrace();
+			// JSPに遷移
+			ServletContext context = getServletContext();
+			RequestDispatcher rd = context.getRequestDispatcher("/userdata.jsp"); // 転送先のURL
+			rd.forward(request, response);
 		}
-
-		// JSPに遷移
-		ServletContext context = getServletContext();
-		RequestDispatcher rd = context.getRequestDispatcher("/userdata.jsp"); // 転送先のURL
-		rd.forward(request, response);
 	}
 
 

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import library.bean.BookBean;
+import library.checker.LoginChecker;
 import library.dao.BookDAO;
 
 /**
@@ -37,24 +38,31 @@ public class BookSearch extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		request.setCharacterEncoding("UTF-8");
+		// ログイン確認
+		LoginChecker loginChecker = new LoginChecker();
+		if(!loginChecker.checkLogin(request)) { // ログインしていない
+			// ログイン画面に飛ばす処理
+			response.sendRedirect("login");
+		} else {
+			request.setCharacterEncoding("UTF-8");
 
-		// ユーザー一覧格納用
-		List<BookBean> bookList = new ArrayList<BookBean>();
-		// ユーザー一覧を取得する
-		try {
-			BookDAO bookDAO = new BookDAO();
-			bookList = bookDAO.getAllBookData();
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
+			// ユーザー一覧格納用
+			List<BookBean> bookList = new ArrayList<BookBean>();
+			// ユーザー一覧を取得する
+			try {
+				BookDAO bookDAO = new BookDAO();
+				bookList = bookDAO.getAllBookData();
+			} catch (SQLException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
+
+			request.setAttribute("bookList", bookList);
+			request.setAttribute("message", "検索条件を入力してください");
+			ServletContext context = getServletContext();
+			RequestDispatcher rd = context.getRequestDispatcher("/BookSearch.jsp");
+			rd.forward(request, response);
 		}
-
-		request.setAttribute("bookList", bookList);
-		request.setAttribute("message", "検索条件を入力してください");
-		ServletContext context = getServletContext();
-		RequestDispatcher rd = context.getRequestDispatcher("/BookSearch.jsp");
-		rd.forward(request, response);
 	}
 
 	/**

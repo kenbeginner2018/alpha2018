@@ -28,22 +28,21 @@ public class UserAddServlet extends HttpServlet {
 		// ログイン確認
 		LoginChecker loginChecker = new LoginChecker();
 		if(!loginChecker.checkLogin(request)) { // ログインしていない
-			/* TODO
-			 * ログイン画面に飛ばす処理
-			 */
-		}
+			// ログイン画面に飛ばす処理
+			response.sendRedirect("login");
+		} else {
+			try {
+				// 学部一覧をリクエストに追加する
+				userAddService.init(request);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 
-		try {
-			// 学部一覧をリクエストに追加する
-			userAddService.init(request);
-		} catch (SQLException e) {
-			e.printStackTrace();
+			// JSPに遷移
+			ServletContext context = getServletContext();
+			RequestDispatcher rd = context.getRequestDispatcher("/useradd.jsp"); // 転送先のURL
+			rd.forward(request, response);
 		}
-
-		// JSPに遷移
-		ServletContext context = getServletContext();
-		RequestDispatcher rd = context.getRequestDispatcher("/useradd.jsp"); // 転送先のURL
-		rd.forward(request, response);
 	}
 
 

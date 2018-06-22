@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import library.bean.BookBean;
+import library.checker.LoginChecker;
 import library.dao.BookDAO;
 import library.dao.SubjectDAO;
 
@@ -38,31 +39,38 @@ public class BookManagement extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		String button = request.getParameter("button");
-		ServletContext context = getServletContext();
-		RequestDispatcher rd =context.getRequestDispatcher("/error.jsp");
-		if(button.equals("書籍の追加")) {
-			rd = context.getRequestDispatcher("/addBook.jsp");
-		}else if(button.equals("詳細")||button.equals("更新")) {
-			BookBean bbn = new BookBean();
-			String subName="";
-			try {
-				BookDAO bookDAO = new BookDAO();
-				bbn = bookDAO.getBookBean(request.getParameter("label"));
-				SubjectDAO subDAO = new SubjectDAO();
-				subName=subDAO.getSubjectName(bbn.getSubjectId());
-			} catch (SQLException e) {
-				// TODO 自動生成された catch ブロック
-				e.printStackTrace();
-			}
-			request.setAttribute("bookData",bbn);
-			request.setAttribute("subName", subName);
+		// ログイン確認
+		LoginChecker loginChecker = new LoginChecker();
+		if(!loginChecker.checkLogin(request)) { // ログインしていない
+			// ログイン画面に飛ばす処理
+			response.sendRedirect("login");
+		} else {
+			String button = request.getParameter("button");
+			ServletContext context = getServletContext();
+			RequestDispatcher rd =context.getRequestDispatcher("/error.jsp");
+			if(button.equals("書籍の追加")) {
+				rd = context.getRequestDispatcher("/addBook.jsp");
+			}else if(button.equals("詳細")||button.equals("更新")) {
+				BookBean bbn = new BookBean();
+				String subName="";
+				try {
+					BookDAO bookDAO = new BookDAO();
+					bbn = bookDAO.getBookBean(request.getParameter("label"));
+					SubjectDAO subDAO = new SubjectDAO();
+					subName=subDAO.getSubjectName(bbn.getSubjectId());
+				} catch (SQLException e) {
+					// TODO 自動生成された catch ブロック
+					e.printStackTrace();
+				}
+				request.setAttribute("bookData",bbn);
+				request.setAttribute("subName", subName);
 
-			rd = context.getRequestDispatcher("/BookManagement.jsp");
-		}else {
-			System.out.println("error");
+				rd = context.getRequestDispatcher("/BookManagement.jsp");
+			}else {
+				System.out.println("error");
+			}
+			rd.forward(request, response);
 		}
-		rd.forward(request, response);
 	}
 
 	/**
