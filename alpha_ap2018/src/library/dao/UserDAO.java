@@ -51,14 +51,11 @@ public class UserDAO {
 				userBean = new UserBean();
 				userBean.setUserId(rs.getString("USERID"));
 				userBean.setUserPw(rs.getString("USERPW"));
-				// TODO WING
 				userBean.setBorrowNum(rs.getInt("BORROWNUM"));
-				// TODO DEPARTMENT
 				userBean.setDeptId(rs.getInt("DEPTID"));
 				userBean.setName(rs.getString("NAME"));
 				userBean.setGrade(rs.getInt("GRADE"));
-				// TODO I → A
-				userBean.setAvailability(rs.getBoolean("IVAILABILITY"));
+				userBean.setAvailability(rs.getBoolean("AVAILABILITY"));
 				userList.add(userBean);
 			}
 			// 結果オブジェクトの開放
@@ -128,14 +125,11 @@ public class UserDAO {
 				userBean = new UserBean();
 				userBean.setUserId(rs.getString("USERID"));
 				userBean.setUserPw(rs.getString("USERPW"));
-				// TODO WING
 				userBean.setBorrowNum(rs.getInt("BORROWNUM"));
-				// TODO DEPARTMENT
 				userBean.setDeptId(rs.getInt("DEPTID"));
 				userBean.setName(rs.getString("NAME"));
 				userBean.setGrade(rs.getInt("GRADE"));
-				// TODO I → A
-				userBean.setAvailability(rs.getBoolean("IVAILABILITY"));
+				userBean.setAvailability(rs.getBoolean("AVAILABILITY"));
 				userList.add(userBean);
 			}
 			// 結果オブジェクトの開放
