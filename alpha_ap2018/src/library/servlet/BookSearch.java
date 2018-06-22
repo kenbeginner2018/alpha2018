@@ -37,6 +37,8 @@ public class BookSearch extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
+		request.setCharacterEncoding("UTF-8");
+
 		// ユーザー一覧格納用
 		List<BookBean> bookList = new ArrayList<BookBean>();
 		// ユーザー一覧を取得する
