@@ -28,12 +28,12 @@
 			</p>
 
 			<p>
-		<form action="Reserve" method="get">
+		<form action="reserve" method="get">
 			<input type="submit" value="予約状況一覧"name="Reserve"style="position:absolute; left: 20%; top: 50%;padding: 20px 35px">
 			</input>
 		</form>
 
-		<form action="RequestListServlet" method="get">
+		<form action="requestList" method="get">
 			<input type="submit" value="リクエスト一覧"name="RequestListServlet"style="position:absolute; left: 45%; top: 50%;padding: 20px 30px">
 			</input>
 		</form>
