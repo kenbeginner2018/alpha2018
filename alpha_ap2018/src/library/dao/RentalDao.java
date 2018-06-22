@@ -145,7 +145,7 @@ public class RentalDao {
 			ResultSet rs = null;
 			try {
 				// SQLを保持する
-				String sql = "SELECT * FROM RENTALTABLE WHERE USERID=?";
+				String sql = "SELECT * FROM RENTALTABLE WHERE USERID=? AND RETURNFLAG=false";
 				pstatement = connection.prepareStatement(sql);
 				// INパラメータの設定
 				pstatement.setString(1, userId);
