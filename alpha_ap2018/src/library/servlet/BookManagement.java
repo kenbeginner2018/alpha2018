@@ -37,10 +37,10 @@ public class BookManagement extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		String button = request.getParameter("button");
+		ServletContext context = getServletContext();
+		RequestDispatcher rd =context.getRequestDispatcher("/error.jsp");
 		if(button.equals("書籍の追加")) {
-			ServletContext context = getServletContext();
-			RequestDispatcher rd = context.getRequestDispatcher("/addBook.jsp");
-			rd.forward(request, response);
+			rd = context.getRequestDispatcher("/addBook.jsp");
 		}else if(button.equals("詳細")) {
 			BookBean bbn = new BookBean();
 			String subName="";
@@ -56,12 +56,11 @@ public class BookManagement extends HttpServlet {
 			request.setAttribute("bookData",bbn);
 			request.setAttribute("subName", subName);
 
-			ServletContext context = getServletContext();
-			RequestDispatcher rd = context.getRequestDispatcher("/BookManagement.jsp");
-			rd.forward(request, response);
+			rd = context.getRequestDispatcher("/BookManagement.jsp");
 		}else {
 			System.out.println("error");
 		}
+		rd.forward(request, response);
 	}
 
 	/**

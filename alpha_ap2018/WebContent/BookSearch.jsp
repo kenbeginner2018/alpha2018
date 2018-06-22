@@ -47,6 +47,6 @@
 		<p>該当する本はありません</p>
 	</c:otherwise>
 	</c:choose>
-	<a href="/LibrarySystem/BookSearch">戻る(未実装)</a>
+	<a href="/LibrarySystem/admin">戻る</a>
 </body>
 </html>

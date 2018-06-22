@@ -12,7 +12,7 @@
 
 	<div style="width:200px;height:250px;background:#ffcccc;
 border:#ff0000 solid 1px;float:left;">
-	<img src="${bookData.imagePath}" width="200" height="250" alt="書影"/>
+	<img src="${bookData.imageFileName}" width="200" height="250" alt="書影"/>
 	</div>
 	<div style="padding:50px;">
 	<form action="BookManagement" method="post">
@@ -39,7 +39,7 @@ border:#ff0000 solid 1px;float:left;">
 				<td>科目名</td>
 				<td><input type="text" name="subjectName" value="${subName}" /></td>
 				<td>画像パス</td>
-				<td><input type="text" name="imagePath" value="${bookData.imagePath}"/></td>
+				<td><input type="text" name="imagePath" value="${bookData.imageFileName}"/></td>
 			</tr>
 			<tr>
 				<td colspan="4"/>
