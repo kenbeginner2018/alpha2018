@@ -11,7 +11,7 @@ public class BookBean implements Serializable{
 	private String author;			// 作者名
 	private int stockNum;			// 在庫数(変動しない)
 	private int subjectId;			// 科目ID
-	private String imagePath;		// 画像パス
+	private String imageFileName;		// 画像ファイル名
 
 	public String getLabel() {
 		return label;
@@ -55,10 +55,11 @@ public class BookBean implements Serializable{
 	public void setSubjectId(int subjectId) {
 		this.subjectId = subjectId;
 	}
-	public String getImagePath() {
-		return imagePath;
+	public String getImageFileName() {
+		return imageFileName;
 	}
-	public void setImagePath(String imagePath) {
-		this.imagePath = imagePath;
+	public void setImageFileName(String imageFileName) {
+		this.imageFileName = imageFileName;
 	}
 }
+

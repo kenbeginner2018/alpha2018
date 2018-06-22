@@ -173,4 +173,106 @@ public class UserDAO {
 			}
 			return check;
 		}
+
+		// 指定されたIDのユーザを無効にする(フラグを操作)
+		public boolean disableUserDataById(String userId) throws SQLException{
+			int numRow = 0;
+			PreparedStatement pstatement = null;
+			try {
+				// トランザクション開始
+				connection.setAutoCommit(false);
+				// SQLを保持するPreparedStatementの生成
+				String sql = "UPDATE USERTABLE SET AVAILABILITY = false WHERE USERID=?";
+
+				pstatement = connection.prepareStatement(sql);
+				// INパラメータの設定
+				pstatement.setString(1, userId);
+				// SQLを発行し、登録された行数を取得
+				numRow = pstatement.executeUpdate();
+			} finally {
+				if(numRow > 0) { // 登録成功
+					connection.commit();
+				} else { // 登録失敗
+					connection.rollback();
+				}
+				// PreparedStatementオブジェクトの開放
+				pstatement.close();
+			}
+
+			if(numRow > 0) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		// 指定されたユーザ情報をDBに追加, 返り値は成功したかどうか
+		public boolean addUserData(UserBean userBean) throws SQLException{
+			int numRow = 0;
+			PreparedStatement pstatement = null;
+			try {
+				// トランザクション開始
+				connection.setAutoCommit(false);
+				// SQLを保持するPreparedStatementの生成
+				// 1:ID, 2:PW, 借りている数, 3:学部名, 4:氏名, 5:学年, 使用可否
+				String sql = "INSERT INTO USERTABLE VALUES (?, ?, 0, ?, ?, ?, true)";
+				pstatement = connection.prepareStatement(sql);
+				// INパラメータの設定
+				pstatement.setString(1, userBean.getUserId());
+				pstatement.setString(2, userBean.getUserPw());
+				pstatement.setInt(3, userBean.getDeptId());
+				pstatement.setString(4, userBean.getName());
+				pstatement.setInt(5, userBean.getGrade());
+				// SQLを発行し、登録された行数を取得
+				numRow = pstatement.executeUpdate();
+			} finally {
+				if(numRow > 0) { // 登録成功
+					connection.commit();
+				} else { // 登録失敗
+					connection.rollback();
+				}
+				// PreparedStatementオブジェクトの開放
+				pstatement.close();
+			}
+
+			if(numRow > 0) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		public boolean updateUserDataById(String targetId, int deptId, int grade, String name) throws SQLException {
+			int numRow = 0;
+			PreparedStatement pstatement = null;
+			try {
+				// トランザクション開始
+				connection.setAutoCommit(false);
+				// SQLを保持するPreparedStatementの生成
+				String sql = "UPDATE USERTABLE SET DEPTID = ?, GRADE = ?, NAME = ? WHERE USERID=?";
+
+				pstatement = connection.prepareStatement(sql);
+				// INパラメータの設定
+				pstatement.setInt(1, deptId);
+				pstatement.setInt(2, grade);
+				pstatement.setString(3, name);
+				pstatement.setString(4, targetId);
+				// SQLを発行し、登録された行数を取得
+				numRow = pstatement.executeUpdate();
+			} finally {
+				if(numRow > 0) { // 登録成功
+					connection.commit();
+				} else { // 登録失敗
+					connection.rollback();
+				}
+				// PreparedStatementオブジェクトの開放
+				pstatement.close();
+			}
+
+			if(numRow > 0) {
+				return true;
+			} else {
+				return false;
+			}
+		}
 }

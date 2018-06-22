@@ -136,4 +136,39 @@ public class RentalDao {
 			return check;
 		}
 
+		// 対象IDのユーザの貸し出し情報を取得する
+		public List<RentalBean> getAllRentalDataById(String userId) throws SQLException{
+			// 結果を返す用
+			List<RentalBean> rentalList = new ArrayList<RentalBean>();
+			RentalBean rentalBean = null;
+			PreparedStatement pstatement = null;
+			ResultSet rs = null;
+			try {
+				// SQLを保持する
+				String sql = "SELECT * FROM RENTALTABLE WHERE USERID=?";
+				pstatement = connection.prepareStatement(sql);
+				// INパラメータの設定
+				pstatement.setString(1, userId);
+				// SQL文発行
+				rs = pstatement.executeQuery();
+				while(rs.next()) {
+					// 列名を指定して値を取得
+					rentalBean = new RentalBean();
+					rentalBean.setRentalId(rs.getInt("RENTALID"));
+					rentalBean.setLabel(rs.getString("LABEL"));
+					rentalBean.setUserId(rs.getString("USERID"));
+					rentalBean.setRentalDate(rs.getString("RENTALDATE"));
+					rentalBean.setExtendFlag(rs.getBoolean("EXTENDFLAG"));
+					rentalBean.setReturnFlag(rs.getBoolean("RETURNFLAG"));
+					rentalList.add(rentalBean);
+				}
+				// 結果オブジェクトの開放
+				rs.close();
+			} finally {
+				// Preparedオブジェクトの開放
+				pstatement.close();
+			}
+			return rentalList;
+		}
+
 }

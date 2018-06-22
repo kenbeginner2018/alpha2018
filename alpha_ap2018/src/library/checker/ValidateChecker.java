@@ -2,7 +2,36 @@ package library.checker;
 
 public class ValidateChecker {
 
+	// エラーメッセージ一覧
+	private String userIdErrorMessage = "ユーザIDは「アルファベット小文字1文字 + 数字8桁」です。";
+	private String userPwErrorMessage = "パスワードは5文字以上10文字以下です。";
+	private String gradeErrorMessage  = "学年は数字1桁で入力してください。";
+
 	// 各メソッドの戻り値 true: 一致, false :不一致
+
+	public String getUserIdErrorMessage() {
+		return userIdErrorMessage;
+	}
+
+	public void setUserIdErrorMessage(String userIdErrorMessage) {
+		this.userIdErrorMessage = userIdErrorMessage;
+	}
+
+	public String getUserPwErrorMessage() {
+		return userPwErrorMessage;
+	}
+
+	public void setUserPwErrorMessage(String userPwErrorMessage) {
+		this.userPwErrorMessage = userPwErrorMessage;
+	}
+
+	public String getGradeErrorMessage() {
+		return gradeErrorMessage;
+	}
+
+	public void setGradeErrorMessage(String gradeErrorMessage) {
+		this.gradeErrorMessage = gradeErrorMessage;
+	}
 
 	// 受け取った文字列がユーザIDの形式と一致するかチェック
 	public boolean checkUserId(String userId) {

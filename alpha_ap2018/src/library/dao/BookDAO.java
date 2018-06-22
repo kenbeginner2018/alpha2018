@@ -53,7 +53,7 @@ public class BookDAO {
 				bookBean.setPublicationYear(rs.getInt("PUBLICATIONYEAR"));
 				bookBean.setAuthor(rs.getString("AUTHOR"));
 				bookBean.setSubjectId(rs.getInt("SUBJECTID"));
-				bookBean.setImagePath(rs.getString("IMAGEFILENAME"));
+				bookBean.setImageFileName(rs.getString("IMAGEFILENAME"));
 				bookBean.setStockNum(rs.getInt("STOCKNUM"));
 				bookList.add(bookBean);
 			}
@@ -118,7 +118,7 @@ public class BookDAO {
 				bookBean.setPublicationYear(rs.getInt("PUBLICATIONYEAR"));
 				bookBean.setAuthor(rs.getString("AUTHOR"));
 				bookBean.setSubjectId(rs.getInt("SUBJECTID"));
-				bookBean.setImagePath(rs.getString("IMAGEFILENAME"));
+				bookBean.setImageFileName(rs.getString("IMAGEFILENAME"));
 				bookBean.setStockNum(rs.getInt("STOCKNUM"));
 				bookList.add(bookBean);
 			}
@@ -153,7 +153,7 @@ public class BookDAO {
 			bookBean.setPublicationYear(rs.getInt("PUBLICATIONYEAR"));
 			bookBean.setAuthor(rs.getString("AUTHOR"));
 			bookBean.setSubjectId(rs.getInt("SUBJECTID"));
-			bookBean.setImagePath(rs.getString("IMAGEFILENAME"));
+			bookBean.setImageFileName(rs.getString("IMAGEFILENAME"));
 			bookBean.setStockNum(rs.getInt("STOCKNUM"));
 		} finally {
 			// Preparedオブジェクトの開放
@@ -342,6 +342,43 @@ public class BookDAO {
 			statement.close();
 		}
 		return check;
+	}
+
+	// 対象IDの本を取得する(実質1つ)
+	public List<BookBean> getBookDataById(String bookLabel) throws SQLException{
+		// 結果を返す用
+		List<BookBean> bookList = new ArrayList<BookBean>();
+		BookBean bookBean = null;
+		PreparedStatement pstatement = null;
+		ResultSet rs = null;
+		try {
+			// SQLを保持する
+			String sql = "SELECT * FROM BOOKTABLE WHERE LABEL=?";
+			pstatement = connection.prepareStatement(sql);
+			// INパラメータの設定
+			pstatement.setString(1, bookLabel);
+			// SQL文発行
+			rs = pstatement.executeQuery();
+			while(rs.next()) {
+				// 列名を指定して値を取得
+				bookBean = new BookBean();
+				bookBean.setLabel(rs.getString("LABEL"));
+				bookBean.setTitle(rs.getString("TITLE"));
+				bookBean.setPublisher(rs.getString("PUBLISHER"));
+				bookBean.setPublicationYear(rs.getInt("PUBLICATIONYEAR"));
+				bookBean.setAuthor(rs.getString("AUTHOR"));
+				bookBean.setStockNum(rs.getInt("STOCKNUM"));
+				bookBean.setSubjectId(rs.getInt("SUBJECTID"));
+				bookBean.setImageFileName("IMAGEFILENAME");
+				bookList.add(bookBean);
+			}
+			// 結果オブジェクトの開放
+			rs.close();
+		} finally {
+			// Preparedオブジェクトの開放
+			pstatement.close();
+		}
+		return bookList;
 	}
 
 }
