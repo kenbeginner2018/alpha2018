@@ -23,6 +23,9 @@ public class ReturnService {
 		try {
 			RentalDao rentalDao = new RentalDao();
 			rentalList = rentalDao.getRental(labelId,userId);		//戻り値でBeanのリストを取得
+			if(rentalList.size() == 0) {
+				request.setAttribute("errorMessage","該当データがありません");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

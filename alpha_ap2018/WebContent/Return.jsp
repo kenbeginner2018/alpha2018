@@ -66,5 +66,6 @@
 			</c:forEach>
 		</table>
 	</c:if>
+	<p><c:out value="${errorMessage}" /></p>
 </body>
 </html>

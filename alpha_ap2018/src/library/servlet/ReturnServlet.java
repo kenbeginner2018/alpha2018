@@ -42,9 +42,9 @@ public class ReturnServlet extends HttpServlet {
 		} else {
 			try {
 				returnService.rentalListSearch(request);
-			} catch (SQLException e) {
-				// TODO 自動生成された catch ブロック
+			} catch (Exception e) {
 				e.printStackTrace();
+				request.setAttribute("errorMessage","該当データがありません");
 			}
 
 			//JSPへの転送

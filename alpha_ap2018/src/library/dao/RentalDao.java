@@ -41,20 +41,27 @@ public class RentalDao {
 			List<RentalBean> RentalList = new ArrayList<RentalBean>();
 			PreparedStatement pstatement = null;
 			ResultSet rs = null;
-			try {
-				String sql = null;
+			BookDAO bookDao = new BookDAO();
+			UserDAO userDao = new UserDAO();
+			String sql = null;
 
-				if( ("".equals(labelId) || labelId == null ) && ("".equals(userId)  || userId == null)  ) {						//検索結果が空白
-					sql = "SELECT * FROM RENTALTABLE";							// SQL文発行
-					pstatement = connection.prepareStatement(sql);
-				}else if(!"".equals(labelId) && "".equals(userId)) {			//labelIdで検索
+			try {
+				if(!"".equals(labelId) && "".equals(userId)) {				//labelIdで検索
 					sql = "SELECT * FROM RENTALTABLE WHERE LABEL= ? ";
 					pstatement = connection.prepareStatement(sql);
 					pstatement.setString(1,labelId);
-				}else if("".equals(labelId) && !"".equals(userId)) {			//userIdで検索
+				}else if("".equals(labelId) && !"".equals(userId)) {				//userIdで検索
 					sql = "SELECT * FROM RENTALTABLE WHERE USERID= ? ";
-					pstatement = connection.prepareStatement(sql);				//connectionで問い合わせの準備
+					pstatement = connection.prepareStatement(sql);					//connectionで問い合わせの準備
 					pstatement.setString(1,userId);
+				}else if( ("".equals(labelId) || labelId == null ) && ("".equals(userId)  || userId == null)  ) {						//検索結果が空白
+					sql = "SELECT * FROM RENTALTABLE";								// SQL文発行
+					pstatement = connection.prepareStatement(sql);
+				}else if( bookDao.getBookLabel(labelId)  && userDao.getUserId(userId) ) {	//ユーザーIDと識別ラベルを入力
+					sql = "SELECT * FROM RENTALTABLE WHERE USERID= ? AND LABEL = ?;";
+					pstatement = connection.prepareStatement(sql);
+					pstatement.setString(1,userId);
+					pstatement.setString(2,labelId);
 				}
 					rs = pstatement.executeQuery();
 					while(rs.next()) {
@@ -68,6 +75,8 @@ public class RentalDao {
 						RentalList.add(rentalBean);
 					}
 					rs.close();			// オブジェクトの開放
+			}catch (Exception e) {
+				return RentalList;
 			}finally {
 				pstatement.close();		// Preparedオブジェクトの開放
 			}
