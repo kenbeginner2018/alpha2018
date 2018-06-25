@@ -76,6 +76,7 @@ public class BookDAO {
 			// SQLを保持する
 			String sql = "SELECT * FROM BOOKTABLE";
 			int flug=0;
+
 			if((title!=null&&!title.equals(""))||(author!=null&&!author.equals(""))||
 					(publisher!=null&&!publisher.equals(""))||(subject!=null&&!subject.equals(""))) {
 				if(title!=null&&!title.equals("")) {
@@ -99,10 +100,12 @@ public class BookDAO {
 					flug++;
 				}
 				if(subject!=null&&!subject.equals("")) {
+
+					SubjectDAO subDAO = new SubjectDAO();
 					if(flug!=0) {
-						sql+=" AND SUBJECT LIKE '%"+subject.trim()+"%'";
+						sql+=" AND SUBJECTID LIKE '%"+subDAO.getSubjectId(subject)+"%'";
 					}else {
-						sql += " WHERE SUBJECT LIKE '%"+subject.trim()+"%'";
+						sql += " WHERE SUBJECTID LIKE '%"+subDAO.getSubjectId(subject)+"%'";
 					}
 				}
 			}
