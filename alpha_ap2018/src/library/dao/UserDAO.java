@@ -42,7 +42,7 @@ public class UserDAO {
 		ResultSet rs = null;
 		try {
 			// SQLを保持する
-			String sql = "SELECT * FROM USERTABLE";
+			String sql = "SELECT * FROM USERTABLE WHERE AVAILABILITY=true";
 			pstatement = connection.prepareStatement(sql);
 			// SQL文発行
 			rs = pstatement.executeQuery();
@@ -114,7 +114,7 @@ public class UserDAO {
 		ResultSet rs = null;
 		try {
 			// SQLを保持する
-			String sql = "SELECT * FROM USERTABLE WHERE USERID=?";
+			String sql = "SELECT * FROM USERTABLE WHERE USERID=? AND AVAILABILITY=true";
 			pstatement = connection.prepareStatement(sql);
 			// INパラメータの設定
 			pstatement.setString(1, userId);
