@@ -117,11 +117,10 @@ a:visited {
 
 	<c:otherwise>
 		<p>該当データがありません</p>
+		<a class="link_button" href="requestList">戻る</a>
 	</c:otherwise>
 </c:choose>
 <br />
-<br />
-	<a class="link_button" href="requestList">戻る</a>
 <br />
 	<a class="linkmenu_button" href="admin">メニュー画面へ戻る</a>
 </div>
