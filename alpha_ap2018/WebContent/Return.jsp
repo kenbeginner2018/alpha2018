@@ -4,7 +4,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>返却画面</title>
@@ -14,9 +13,9 @@
 
 	<hr size="2" align="center" />
 		<form action="ReturnServlet" method="get">
-			識別ラベル<input type="text" name="labelId" value="" />
+			ユーザーID　<input type="text" name="userId" value="" />
 			<br></br>
-			ユーザーID<input type="text" name="userId" value="" />
+			識別ラベル　<input type="text" name="labelId" value="" />
 			<br></br>
 			<input type="submit" value="検索" />
 		</form>

@@ -13,9 +13,11 @@
 
 	<hr size="2" align="center" />
 		<form action="RentalServlet" method="post">
-			<center>識別ラベル　<input type="text" name="rabelId" value="" /><br></br>
-			<p>ユーザーID　<input type="text" name="userId" value="" /></p></center>
+			<center>
+			<p>ユーザーID　<input type="text" name="userId" value="" /></p>
+			<p>識別ラベル　<input type="text" name="rabelId" value="" /></p>
 			<div align="center"> <input type="submit" value="貸出" /> </div>
+			</center>
 		</form>
 
 	<hr size="2" align="center" />
