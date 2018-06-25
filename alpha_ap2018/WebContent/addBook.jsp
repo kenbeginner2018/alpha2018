@@ -10,6 +10,10 @@
 </head>
 <body>
 	<div style="padding:50px;">
+	<!-- エラーメッセージを出力する -->
+	<c:if test="${requestScope.notNullError != null}"><p><c:out value="${requestScope.notNullError}" /></p></c:if>
+	<c:if test="${requestScope.pubYearError != null}"><p><c:out value="${requestScope.pubYearError}" /></p></c:if>
+	<c:if test="${requestScope.stockNumError != null}"><p><c:out value="${requestScope.stockNumError}" /></p></c:if>
 	<form action="BookManagement" method="post">
 		<table border="1" summary="書籍情報">
 			<tr>
@@ -48,6 +52,6 @@
 		</table>
 	</form>
 	</div>
-	<a href="/LibrarySystem/BookSearch">戻る</a>
+	<a href="BookSearch">戻る</a>
 </body>
 </html>

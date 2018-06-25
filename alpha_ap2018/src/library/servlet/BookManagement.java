@@ -58,13 +58,32 @@ public class BookManagement extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		if(bm.BookManage(request)) {
-			doGet(request,response);
+//		if(bm.BookManage(request)) {
+//			doGet(request,response);
+//		}
+		// 遷移先JSPを格納する
+		String jsp = null;
+		switch(bm.BookManage(request)) {
+		case 0:
+			doGet(request, response);
+			break;
+		case 1:
+			// 追加or削除成功
+			bs.getAllBook(request);
+			jsp = "/BookSearch.jsp";
+			break;
+		case 2:
+			// 追加失敗
+			jsp = "/addBook.jsp";
+			break;
+		case 3:
+			// 更新失敗
+			jsp = bm.transitionPage(request);
 		}
 
-		bs.getAllBook(request);
+
 		ServletContext context = getServletContext();
-		RequestDispatcher rd = context.getRequestDispatcher("/BookSearch.jsp");
+		RequestDispatcher rd = context.getRequestDispatcher(jsp);
 		rd.forward(request, response);
 	}
 }
