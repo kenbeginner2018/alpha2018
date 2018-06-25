@@ -11,8 +11,68 @@
 div{
 	text-align: center;
 }
-th{
-	background-color:#FF9900;
+.link_button {
+  display: block;
+  text-decoration: none;
+  height:35px;
+  width: 120px;
+  line-height: 37px;
+  color: #2bb6c1;
+  border:solid 1px #2bb6c1;
+  border-radius: 20px;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  -ms-transition: 0.3s;
+  transition: 0.3s;
+  margin-left: auto;
+  margin-right: auto;
+}
+.link_button:hover{
+  background: #2bb6c1;
+  color: #fff;
+}
+.linkmenu_button {
+  display: block;
+  text-decoration: none;
+  height:35px;
+  width: 150px;
+  line-height: 37px;
+  color: #2bb6c1;
+  border:solid 1px #2bb6c1;
+  border-radius: 20px;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  -ms-transition: 0.3s;
+  transition: 0.3s;
+  margin-left: auto;
+  margin-right: auto;
+}
+.linkmenu_button:hover{
+  background: #2bb6c1;
+  color: #fff;
+}
+a:visited {
+  color:#2c4641;
+}
+#table th,#table td {
+  padding: 15px;
+}
+#table tr {
+  background: #F8F8F8;
+}
+#table tr:first-child {
+  background: #8DC4AA;
+}
+
+#table th {;
+  color: #2c4641;
+  border-bottom: solid 1px #759786;
+}
+#table td {
+  color: #2c4641;
+  border-bottom: solid 1px #A7D2BE;
 }
 </style>
 <title>大学の図書管理システム</title>
@@ -27,7 +87,7 @@ th{
 
 <c:choose>
 	<c:when test="${requestScope.requestList.size() >= 1}">
-		<table border="1" align="center">
+		<table id="table" border="1" align="center">
 			<tr>
 				<th>要望申請日</th>
 				<th>氏名</th>
@@ -61,10 +121,9 @@ th{
 </c:choose>
 <br />
 <br />
-	<a href="requestList">戻る</a>
+	<a class="link_button" href="requestList">戻る</a>
 <br />
-<br />
-	<a href="admin">メニュー画面へ戻る</a>
+	<a class="linkmenu_button" href="admin">メニュー画面へ戻る</a>
 </div>
 </body>
 </html>

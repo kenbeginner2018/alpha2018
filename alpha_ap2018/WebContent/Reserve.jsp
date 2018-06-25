@@ -11,11 +11,53 @@
 div{
 	text-align: center;
 }
-th{
-	background-color:#FF9900;
+.link_button {
+  display: block;
+  text-decoration: none;
+  height:35px;
+  width: 120px;
+  line-height: 37px;
+  color: #2bb6c1;
+  border:solid 1px #2bb6c1;
+  border-radius: 20px;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  -ms-transition: 0.3s;
+  transition: 0.3s;
+  margin-left: auto;
+  margin-right: auto;
+}
+.link_button:hover{
+  background: #2bb6c1;
+  color: #fff;
+}
+.linkmenu_button {
+  display: block;
+  text-decoration: none;
+  height:35px;
+  width: 150px;
+  line-height: 37px;
+  color: #2bb6c1;
+  border:solid 1px #2bb6c1;
+  border-radius: 20px;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  -ms-transition: 0.3s;
+  transition: 0.3s;
+  margin-left: auto;
+  margin-right: auto;
+}
+.linkmenu_button:hover{
+  background: #2bb6c1;
+  color: #fff;
+}
+a:visited {
+  color:#2c4641;
 }
 input#submit_button {
-display: inline-block;
+	display: inline-block;
     padding: 0.5em 1em;
     text-decoration: none;
     border-radius: 4px;
@@ -26,15 +68,33 @@ display: inline-block;
     border-bottom: solid 3px #5e7fca;
 }
 input#text_button {
-webkit-box-shadow: 0px 1px rgba(255, 255, 255, 0.5);
-moz-box-shadow: 0px 1px rgba(255, 255, 255, 0.5);
-box-shadow: 0px 1px rgba(255, 255, 255, 0.5);
-webkit-border-radius: 3px;
-moz-border-radius: 3px;
-border-radius: 3px;
+	webkit-box-shadow: 0px 1px rgba(255, 255, 255, 0.5);
+	moz-box-shadow: 0px 1px rgba(255, 255, 255, 0.5);
+	box-shadow: 0px 1px rgba(255, 255, 255, 0.5);
+	webkit-border-radius: 3px;
+	moz-border-radius: 3px;
+	border-radius: 3px;
 }
 input:focus {
-    border:solid 1px #EEA34A;
+  border:solid 1px #EEA34A;
+}
+#table th,#table td {
+  padding: 15px;
+}
+#table tr {
+  background: #F8F8F8;
+}
+#table tr:first-child {
+  background: #8DC4AA;
+}
+
+#table th {;
+  color: #2c4641;
+  border-bottom: solid 1px #759786;
+}
+#table td {
+  color: #2c4641;
+  border-bottom: solid 1px #A7D2BE;
 }
 </style>
 <title>大学の図書管理システム</title>
@@ -58,7 +118,7 @@ input:focus {
 <h2>予約状況一覧</h2>
 <c:choose>
 	<c:when test="${requestScope.reserveList.size() >= 1}">
-		<table border="1" align="center">
+		<table id="table" border="1" align="center">
 			<tr>
 				<th>予約日</th>
 				<th>本のタイトル</th>
@@ -86,10 +146,9 @@ input:focus {
 </c:choose>
 <br />
 <br />
-	<a href="reserve">戻る</a>
+	<a class="link_button" href="reserve">戻る</a>
 <br />
-<br />
-	<a href="admin">メニュー画面へ戻る</a>
+	<a class="linkmenu_button" href="admin">メニュー画面へ戻る</a>
 </div>
 </body>
 </html>
