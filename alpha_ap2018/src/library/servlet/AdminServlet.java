@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import library.service.LogoutExecuter;
+
 /**
  * Servlet implementation class AdminServlet
  */
@@ -26,8 +28,9 @@ public class AdminServlet extends HttpServlet {
 		  //  	rd = getServletConfig().getServletContext().getRequestDispatcher("/ReturnServlet");
 		    	rd = getServletConfig().getServletContext().getRequestDispatcher("/Admin.jsp");
 		    	rd.forward(request, response);
-
-
 	}
-
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		LogoutExecuter le = new LogoutExecuter();
+		le.LogoutExecute(request,response);
+	}
 }
