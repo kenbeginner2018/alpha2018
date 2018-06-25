@@ -2,8 +2,6 @@ package library.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -13,10 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import library.bean.RentalBean;
 import library.checker.LoginChecker;
-import library.dao.RentalDao;
-import library.util.Changer;
+import library.service.ReturnService;
 /**
  * Servlet implementation class ReturnServlet
  */
@@ -24,6 +20,7 @@ import library.util.Changer;
 public class ReturnServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+		ReturnService returnService = new ReturnService();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -43,21 +40,12 @@ public class ReturnServlet extends HttpServlet {
 			// ログイン画面に飛ばす処理
 			response.sendRedirect("login");
 		} else {
-			List<RentalBean> rentalList = new ArrayList<RentalBean>();	// レンタルBean格納変数
-			Changer changer = new Changer();							//Changerインスタンス生成
-
-			String  labelId = request.getParameter("labelId");
-			String userId = request.getParameter("userId");
-
 			try {
-				RentalDao rentalDao = new RentalDao();
-				rentalList = rentalDao.getRental(labelId,userId);		//戻り値でBeanのリストを取得
+				returnService.rentalListSearch(request);
 			} catch (SQLException e) {
+				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
 			}
-
-			request.setAttribute("RentalList", rentalList);				//requestにrentalListを登録
-			request.setAttribute("Changer", changer);
 
 			//JSPへの転送
 			ServletContext context = getServletContext();
@@ -71,23 +59,11 @@ public class ReturnServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-			Changer changer = new Changer();
-			String userId = request.getParameter("userId");		 //ユーザーIDを取得
-			String rentalId = request.getParameter("rentalId");	 //予約IDを取得
-			String labelId = request.getParameter("labelId");		 //ラベルIDを取得
-
-			if(null != changer.userIdToName(userId) ) {//返却ボタンが押されているか
-				request.setAttribute("message","「"+changer.userIdToName(userId)+"」さんが「"
-						+ changer.labelToTitle(labelId)+"」の本を返却しました");
-				try {
-					RentalDao rentalDao = new RentalDao();
-					rentalDao.deleteRental(rentalId);
-				} catch (SQLException e) {
-					// TODO 自動生成された catch ブロック
-					e.printStackTrace();
-				}
-			}else {
-				request.setAttribute("message","返却処理に失敗しました");
+			try {
+				returnService.updateReturnFlag(request);
+			} catch (SQLException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
 			}
 
 			ServletContext context = getServletContext();
