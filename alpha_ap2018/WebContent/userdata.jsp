@@ -12,6 +12,9 @@
 	<a href="userlist">ユーザ一覧へ戻る</a>
 	<h1>ユーザ詳細画面</h1>
 	<hr />
+	<!-- エラーメッセージを出力する -->
+	<c:if test="${requestScope.notNullError != null}"><p><c:out value="${requestScope.notNullError}" /></p></c:if>
+	<c:if test="${requestScope.gradeError != null}"><p><c:out value="${requestScope.gradeError}" /></p></c:if>
 	<form action="userdata" method="post">
 		<p>
 			ユーザID <c:out value="${requestScope.targetUser.userId}" />

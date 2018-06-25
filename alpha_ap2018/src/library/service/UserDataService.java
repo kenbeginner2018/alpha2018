@@ -1,15 +1,18 @@
 package library.service;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import library.bean.BookBean;
 import library.bean.DeptBean;
 import library.bean.RentalBean;
 import library.bean.UserBean;
+import library.checker.ValidateChecker;
 import library.dao.BookDAO;
 import library.dao.DeptDAO;
 import library.dao.RentalDao;
@@ -91,17 +94,58 @@ public class UserDataService {
 	}
 
 	// 指定したIDのユーザ情報のうち、学部名、学年、氏名を更新する
-	public void userDataUpdate(HttpServletRequest request, String targetId, String deptName, int grade, String userName) throws SQLException {
-		// 変換用 (IDから名前とか)
-		Changer changer = new Changer();
-		UserDAO userDAO = null;
-		try {
-			userDAO = new UserDAO();
-			userDAO.updateUserDataById(targetId, changer.deptNameToDeptId(deptName), grade, userName);
-		} finally {
-			if(userDAO != null) {
-				userDAO.close();
+	public boolean userDataUpdate(HttpServletRequest request, HttpServletResponse response, String targetId) throws SQLException, IOException {
+
+		String deptName = request.getParameter("deptName");
+		String grade = request.getParameter("grade");
+		String userName = request.getParameter("name");
+
+		if(deptName != null && grade != null && userName != null) {
+			if(!deptName.isEmpty() && !grade.isEmpty() && !userName.isEmpty()) {
+				// 各入力値の正規表現チェック
+				if(userDataValidate(request, grade)) { // すべての入力チェックをクリアしたら
+					// 変換用 (IDから名前とか)
+					Changer changer = new Changer();
+					UserDAO userDAO = null;
+					try {
+						userDAO = new UserDAO();
+						userDAO.updateUserDataById(targetId, changer.deptNameToDeptId(deptName), Integer.parseInt(grade), userName);
+					} finally {
+						if(userDAO != null) {
+							userDAO.close();
+						}
+					}
+					return true;
+				} else { // 入力チェックに1つでも引っかかったら
+					return false;
+				}
+			} else {
+				request.setAttribute("notNullError", "すべての項目を入力してください。");
+				return false;
 			}
+		} else {
+			return false;
 		}
+	}
+
+	// ユーザ情報更新のバリデーション結果を返す
+	public boolean userDataValidate(HttpServletRequest request, String grade) throws SQLException {
+
+		// 各チェックをクリアしたかのフラグ (クリアしたらtrueにする)
+		boolean gradeClear = false;
+
+		ValidateChecker vc = new ValidateChecker();
+		if(!vc.checkGrade(grade)) {
+			request.setAttribute("gradeError", vc.getGradeErrorMessage());
+		} else {
+			gradeClear = true;
+		}
+
+		if(gradeClear) { // すべての入力チェックをクリアしたら
+			return true;
+		} else {
+			return false;
+		}
+
 	}
 }

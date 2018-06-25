@@ -57,6 +57,7 @@ public class UserDataServlet extends HttpServlet {
 
 		if(btn != null) {
 			if(btn.equals("削除")) { // 削除ボタンが押されたら
+				// ダイアログの結果を取得(OKかキャンセルか)
 				try {
 					userDataService.userDisable(request, targetId);
 				} catch (SQLException e) {
@@ -65,16 +66,18 @@ public class UserDataServlet extends HttpServlet {
 				// ユーザ一覧のGETへ飛ばす
 				response.sendRedirect("userlist");
 			} else if(btn.equals("更新")) { // ユーザ情報更新
-				String deptName = request.getParameter("deptName");
-				String grade = request.getParameter("grade");
-				String userName = request.getParameter("name");
 				try {
-					userDataService.userDataUpdate(request, targetId, deptName, Integer.parseInt(grade), userName);
+					if(userDataService.userDataUpdate(request, response, targetId)) { // 更新成功
+						// ユーザ一覧のGETへ飛ばす
+						response.sendRedirect("userlist");
+					} else { // 更新失敗
+						doGet(request, response);
+					}
+				} catch(IOException e) {
+					e.printStackTrace();
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
-				// ユーザ一覧のGETへ飛ばす
-				response.sendRedirect("userlist");
 			} else if(btn.equals("RESET")) {
 				doGet(request, response);
 			}
