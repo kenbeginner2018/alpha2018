@@ -92,7 +92,6 @@ public class ReserveDAO {
 					reserveBean.setUserId(rs.getString("USERID"));
 					reserveBean.setReserveDate(rs.getString("RESERVEDATE"));
 					reserveBean.setLabel(rs.getString("LABEL"));
-					// TODO I → A
 					reserveBean.setReserveCheckFlag(rs.getBoolean("RESERVECHECKFLAG"));
 					reserveList.add(reserveBean);
 				}
@@ -101,9 +100,6 @@ public class ReserveDAO {
 			} finally {
 				// Preparedオブジェクトの開放
 				pstatement.close();
-			}
-			if(reserveList.size() == 0) {
-				reserveList = null;
 			}
 
 			return reserveList;
