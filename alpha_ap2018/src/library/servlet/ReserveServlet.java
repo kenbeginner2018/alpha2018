@@ -67,16 +67,23 @@ public class ReserveServlet extends HttpServlet {
 		String jsp = "";
 
 		if(btn.equals("検索")) {
+			// 検索タイトル名を取得
+			String searchTitle = request.getParameter("title");
+			if(searchTitle.isEmpty()) { // 検索条件が空のとき
+					doGet(request, response);
+
+			} else { // 検索条件が入力されているとき
 			// 予約状況一覧格納用
 			List<ReserveBean> reserveList = new ArrayList<ReserveBean>();
 			// 本のタイトルで予約状況検索
-			try {
-				ReserveDAO reserveDAO = new ReserveDAO();
-				reserveList = reserveDAO.getReserveDataByTitle(request.getParameter("title"));
-				request.setAttribute("reserveList", reserveList);
-			} catch (SQLException e) {
-				// TODO 自動生成された catch ブロック
-				e.printStackTrace();
+				try {
+					ReserveDAO reserveDAO = new ReserveDAO();
+					reserveList = reserveDAO.getReserveDataByTitle(request.getParameter("title"));
+					request.setAttribute("reserveList", reserveList);
+				} catch (SQLException e) {
+					// TODO 自動生成された catch ブロック
+					e.printStackTrace();
+				}
 			}
 
 		} else if(btn.equals("削除")){
