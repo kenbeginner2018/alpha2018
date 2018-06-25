@@ -82,4 +82,46 @@ public class SubjectDAO {
 		}
 		return check;
 	}
+
+	//Id取得(あいまい検索用)
+	public int getSubjectId(String subName,boolean flag) throws SQLException {
+		String sql=null;
+		ResultSet rs=null;
+		PreparedStatement statement=null;
+		int subId=-1;
+
+		try {
+			sql = "SELECT subjectId FROM SUBJECTTABLE WHERE SUBJECTNAME LIKE '%"+subName+"%'";
+			statement = connection.prepareStatement(sql);
+			rs = statement.executeQuery();
+			rs.next();
+			subId=rs.getInt("SUBJECTID");
+		}finally {
+			rs.close();
+			statement.close();
+		}
+		return subId;
+	}
+
+	//指定された科目名が科目テーブルに存在するか確認する(あいまい検索用)
+	public boolean checkSubjectName(String subName,boolean flag) throws SQLException {
+
+		String sql=null;
+		PreparedStatement statement=null;
+		ResultSet rs =null;
+		boolean check=false;
+		try {
+			sql = "SELECT count(subjectname) from subjecttable where subjectname LIKE '%"+subName+"%'";
+			statement = connection.prepareStatement(sql);
+			rs=statement.executeQuery();
+			rs.next();
+			if(rs.getInt("COUNT(SUBJECTNAME)")==1){
+				check=true;
+			}
+		}finally {
+			rs.close();
+			statement.close();
+		}
+		return check;
+	}
 }

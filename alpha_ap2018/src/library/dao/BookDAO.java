@@ -80,32 +80,36 @@ public class BookDAO {
 			if((title!=null&&!title.equals(""))||(author!=null&&!author.equals(""))||
 					(publisher!=null&&!publisher.equals(""))||(subject!=null&&!subject.equals(""))) {
 				if(title!=null&&!title.equals("")) {
-					sql += " WHERE TITLE LIKE '%"+title.trim()+"%'";
+					sql += " WHERE TITLE LIKE '%"+title+"%'";
 					flug++;
 				}
 				if(author!=null&&!author.equals("")) {
 					if(flug!=0) {
-						sql += " AND AUTHOR LIKE '%"+author.trim()+"%'";
+						sql += " AND AUTHOR LIKE '%"+author+"%'";
 					}else {
-						sql += " WHERE AUTHOR LIKE '%"+author.trim()+"%'";
+						sql += " WHERE AUTHOR LIKE '%"+author+"%'";
 					}
 					flug++;
 				}
 				if(publisher!=null&&!publisher.equals("")) {
 					if(flug!=0) {
-						sql+=" AND PUBLISHER LIKE '%"+publisher.trim()+"%'";
+						sql+=" AND PUBLISHER LIKE '%"+publisher+"%'";
 					}else {
-						sql += " WHERE PUBLISHER LIKE '%"+publisher.trim()+"%'";
+						sql += " WHERE PUBLISHER LIKE '%"+publisher+"%'";
 					}
 					flug++;
 				}
 				if(subject!=null&&!subject.equals("")) {
 
 					SubjectDAO subDAO = new SubjectDAO();
+					int subId=-2;
+					if(subDAO.checkSubjectName(subject,true)) {
+						subId=subDAO.getSubjectId(subject,true);
+					}
 					if(flug!=0) {
-						sql+=" AND SUBJECTID LIKE '%"+subDAO.getSubjectId(subject)+"%'";
+						sql+=" AND SUBJECTID ="+subId;
 					}else {
-						sql += " WHERE SUBJECTID LIKE '%"+subDAO.getSubjectId(subject)+"%'";
+						sql += " WHERE SUBJECTID ="+subId;
 					}
 				}
 			}
