@@ -109,6 +109,22 @@ public class Changer {
 			return null;
 	}
 
+	// タイトルを受け取ったら対応する本のラベルにして返す(LIKE検索)
+	public List<BookBean> likeTitleToBookList(String title) {
+		// 一覧格納用
+		List<BookBean> bookList = new ArrayList<BookBean>();
+			try {
+				BookDAO bookDAO = new BookDAO();
+				bookList = bookDAO.getBookDataByLikeTitle(title);
+				return bookList;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		// 該当無し
+			return null;
+	}
+
 	// ユーザIDから氏名を取得する
 	public String userIdToName(String userId) {
 		// ユーザ一覧格納用

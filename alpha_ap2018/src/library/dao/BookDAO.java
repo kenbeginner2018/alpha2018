@@ -328,6 +328,43 @@ public class BookDAO {
 		return bookList;
 	}
 
+	// 対象タイトルのラベルをあいまい検索で取得する
+	public List<BookBean> getBookDataByLikeTitle(String title) throws SQLException{
+		// 結果を返す用
+		List<BookBean> bookList = new ArrayList<BookBean>();
+		BookBean bookBean = null;
+		PreparedStatement pstatement = null;
+		ResultSet rs = null;
+		try {
+			// SQLを保持する
+			String sql = "SELECT * FROM BOOKTABLE WHERE TITLE LIKE ?";
+			pstatement = connection.prepareStatement(sql);
+			// INパラメータの設定
+			pstatement.setString(1, "%" + title + "%");
+			// SQL文発行
+			rs = pstatement.executeQuery();
+			while(rs.next()) {
+				// 列名を指定して値を取得
+				bookBean = new BookBean();
+				bookBean.setLabel(rs.getString("LABEL"));
+				bookBean.setTitle(rs.getString("TITLE"));
+				bookBean.setPublisher(rs.getString("PUBLISHER"));
+				bookBean.setPublicationYear(rs.getInt("PUBLICATIONYEAR"));
+				bookBean.setAuthor(rs.getString("AUTHOR"));
+				bookBean.setStockNum(rs.getInt("STOCKNUM"));
+				bookBean.setSubjectId(rs.getInt("SUBJECTID"));
+			//	bookBean.setImageFileName("IMAGEFILENAME");
+				bookList.add(bookBean);
+			}
+			// 結果オブジェクトの開放
+			rs.close();
+		} finally {
+			// Preparedオブジェクトの開放
+			pstatement.close();
+		}
+		return bookList;
+	}
+
 	// 識別ラベルと同名のラベルを検索
 	public boolean getBookLabel(String labelId) throws SQLException{
 
