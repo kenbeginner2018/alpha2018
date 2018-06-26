@@ -18,7 +18,7 @@
 		<input type="submit" name="btn" value="ユーザ追加" />
 	</form>
 	<hr />
-	<h2>ユーザ一覧</h2>
+	<h2>ユーザー一覧</h2>
 	<c:choose>
 		<c:when test="${requestScope.userList != null}">
 			<table border="1">

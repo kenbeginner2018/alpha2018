@@ -9,7 +9,7 @@
 	<title>大学の図書管理システム</title>
 </head>
 <body>
-	<a href="userlist">ユーザ一覧へ戻る</a>
+	<a href="userlist">ユーザー一覧へ戻る</a>
 	<h1>ユーザ詳細画面</h1>
 	<hr />
 	<!-- エラーメッセージを出力する -->
