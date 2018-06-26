@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import library.bean.BookBean;
 import library.bean.ReserveBean;
 import library.util.Changer;
 
@@ -77,29 +78,36 @@ public class ReserveDAO {
 			ResultSet rs = null;
 			try {
 				Changer changer = new Changer();
-				String bookLabel = changer.titleTolabel(title);
+				List<BookBean> bookList = changer.likeTitleToBookList(title);
 				// SQLを保持する
 				String sql = "SELECT * FROM RESERVETABLE WHERE LABEL=?";
 				pstatement = connection.prepareStatement(sql);
-				// INパラメータの設定
-				pstatement.setString(1, bookLabel);
-				// SQL文発行
-				rs = pstatement.executeQuery();
-				while(rs.next()) {
-					// 列名を指定して値を取得
-					reserveBean = new ReserveBean();
-					reserveBean.setReserveId(rs.getInt("RESERVEID"));
-					reserveBean.setUserId(rs.getString("USERID"));
-					reserveBean.setReserveDate(rs.getString("RESERVEDATE"));
-					reserveBean.setLabel(rs.getString("LABEL"));
-					reserveBean.setReserveCheckFlag(rs.getBoolean("RESERVECHECKFLAG"));
-					reserveList.add(reserveBean);
+				for(int i = 0; i < bookList.size(); i++) {
+					// INパラメータの設定
+					pstatement.setString(1, bookList.get(i).getLabel());
+					// SQL文発行
+					rs = pstatement.executeQuery();
+					if(rs.next()) {
+						// 列名を指定して値を取得
+						reserveBean = new ReserveBean();
+						reserveBean.setReserveId(rs.getInt("RESERVEID"));
+						reserveBean.setUserId(rs.getString("USERID"));
+						reserveBean.setReserveDate(rs.getString("RESERVEDATE"));
+						reserveBean.setLabel(rs.getString("LABEL"));
+						reserveBean.setReserveCheckFlag(rs.getBoolean("RESERVECHECKFLAG"));
+						reserveList.add(reserveBean);
+					}
 				}
-				// 結果オブジェクトの開放
-				rs.close();
+				if(rs != null) {
+					// 結果オブジェクトの開放
+					rs.close();
+				}
 			} finally {
 				// Preparedオブジェクトの開放
 				pstatement.close();
+			}
+			if(reserveList.size() == 0) {
+				reserveList = null;
 			}
 
 			return reserveList;
