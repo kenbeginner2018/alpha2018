@@ -9,8 +9,8 @@
 	<title>大学の図書管理システム</title>
 </head>
 <body>
-	<a href="userlist">ユーザ一覧へ戻る</a>
-	<h1>ユーザ追加</h1>
+	<a href="userlist">ユーザー一覧へ戻る</a>
+	<h1>ユーザー追加</h1>
 	<hr />
 	<form action="useradd" method="post">
 		<!-- エラーメッセージを出力する -->
@@ -20,11 +20,11 @@
 		<c:if test="${requestScope.gradeError != null}"><p><c:out value="${requestScope.gradeError}" /></p></c:if>
 		<table border="1">
 			<tr>
-				<td>ユーザID</td>
+				<td>ユーザーID</td>
 				<td><input type="text" name="userId" /></td>
 			</tr>
 			<tr>
-				<td>ユーザパスワード</td>
+				<td>ユーザーパスワード</td>
 				<td><input type="text" name="userPw" /></td>
 			</tr>
 			<tr>
