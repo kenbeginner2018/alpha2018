@@ -32,6 +32,9 @@ div{
   background: #2bb6c1;
   color: #fff;
 }
+
+
+
 .linkmenu_button {
   display: block;
   text-decoration: none;
@@ -148,7 +151,7 @@ input:focus {
 <br />
 	<a class="link_button" href="reserve">戻る</a>
 <br />
-	<a class="linkmenu_button" href="admin">メニュー画面へ戻る</a>
+	<a class="linkmenu_button" href="admin">　メニュー画面へ戻る</a>
 </div>
 </body>
 </html>
