@@ -16,7 +16,7 @@ div{
   display: block;
   text-decoration: none;
   height:35px;
-  width: 140px;
+  width: 145px;
   line-height: 37px;
   color: #2bb6c1;
   border:solid 1px #2bb6c1;
