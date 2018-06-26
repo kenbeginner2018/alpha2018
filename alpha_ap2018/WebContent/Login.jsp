@@ -13,7 +13,7 @@
 
     <FORM method="POST" action="login" >
 	      ID : <INPUT type="text" name="username" value="" /><br><br>
-	      PW : <INPUT type="text" name="password" value="" /><br><br>
+	      PW : <INPUT type="password" name="password" value="" /><br><br>
       <INPUT type="submit" value="ログイン">
     </FORM>
 
