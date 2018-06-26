@@ -15,7 +15,7 @@
 	<form action="userlist" method="post">
 		<input type="text" name="searchId" />
 		<input type="submit" name="btn" value="検索" />
-		<input type="submit" name="btn" value="ユーザ追加" />
+		<input type="submit" name="btn" value="ユーザー追加" />
 	</form>
 	<hr />
 	<h2>ユーザー一覧</h2>

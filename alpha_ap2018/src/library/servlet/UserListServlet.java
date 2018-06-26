@@ -69,7 +69,7 @@ public class UserListServlet extends HttpServlet {
 				RequestDispatcher rd = context.getRequestDispatcher("/userlist.jsp"); // 転送先のURL
 				rd.forward(request, response);
 			}
-		} else if(btn.equals("ユーザ追加")) {
+		} else if(btn.equals("ユーザー追加")) {
 			// UserAddServletにリダイレクト
 			response.sendRedirect("useradd");
 		}

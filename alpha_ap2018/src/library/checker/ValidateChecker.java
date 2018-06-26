@@ -4,7 +4,7 @@ public class ValidateChecker {
 
 	// エラーメッセージ一覧
 	// ユーザID_エラーメッセージ
-	private final String userIdErrorMessage   = "ユーザIDは「アルファベット小文字1文字 + 半角数字8桁」です。";
+	private final String userIdErrorMessage   = "ユーザーIDは「アルファベット小文字1文字 + 半角数字8桁」です。";
 	// ユーザPw_エラーメッセージ
 	private final String userPwErrorMessage   = "パスワードは5文字以上10文字以下です。";
 	// 学年_エラーメッセージ

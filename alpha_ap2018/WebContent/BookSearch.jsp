@@ -10,8 +10,8 @@
 </head>
 <body>
 
-	<form action="BookManagement" method="get"><input type="submit" name="button" value="書籍の追加"/></form>
-	<div style="width:85%;">
+	<form action="BookManagement" method="get"><input type="submit" name="button" value="書籍の追加" />
+	<div style="width:85%;aligh:center;">
 	<h1>蔵書検索</h1>
 	<div style="text-align:center;border:#d0d0d0 outset 5px;width:500px;height:100px;padding:10px;aligh:center;">
 	<form action="BookSearch" method="post" >
