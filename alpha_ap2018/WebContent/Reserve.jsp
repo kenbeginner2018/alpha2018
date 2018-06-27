@@ -97,7 +97,7 @@ input:focus {
   border-bottom: solid 1px #A7D2BE;
 }
 </style>
-<title>大学の図書管理システム</title>
+<title>予約状況一覧</title>
 </head>
 <body>
 
