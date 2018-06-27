@@ -25,7 +25,7 @@
 			</tr>
 			<tr>
 				<td>ユーザーパスワード</td>
-				<td><input type="text" name="userPw" /></td>
+				<td><input type="password" name="userPw" /></td>
 			</tr>
 			<tr>
 				<td>学部</td>

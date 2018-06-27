@@ -10,7 +10,7 @@
 </head>
 <body>
 	<a href="userlist">ユーザー一覧へ戻る</a>
-	<h1>ユーザ詳細画面</h1>
+	<h1>ユーザ管理画面</h1>
 	<hr />
 	<!-- エラーメッセージを出力する -->
 	<c:if test="${requestScope.notNullError != null}"><p><c:out value="${requestScope.notNullError}" /></p></c:if>
